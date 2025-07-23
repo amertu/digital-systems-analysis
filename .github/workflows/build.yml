@@ -31,13 +31,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
 
-      - name: Make clone script executable
+      - name: Make convert script executable
         run: chmod +x ./scripts/convert_articles.sh
 
       - name: Convert LaTeX to HTML
         run: ./scripts/convert_articles.sh
 
-      - name: Make clone script executable
+      - name: Make generate index script executable
         run: chmod +x ./scripts/generate_index.sh
 
       - name: Generate index.html
@@ -46,7 +46,7 @@ jobs:
       - name: Copy static assets
         run: cp style.css output/style.css
 
-      - name: Disable Jekyll
+      - name: Disable Jekyll on GitHub Pages
         run: touch output/.nojekyll
 
       - name: Deploy to GitHub Pages
