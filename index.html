@@ -3,16 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <title>Digital Systems Analysis</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #1a202c;
+    }
+    main { flex: 1 0 auto; max-width: 900px; margin: 2rem auto 3rem auto; padding: 0 1rem; }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      background-color: #2d3748;
+      color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    }
+    header h1 { margin: 0; font-weight: 700; font-size: 2.5rem; }
+    header p {
+      margin-top: 0.3rem;
+      font-style: italic;
+      font-weight: 300;
+      color: #a0aec0;
+      font-size: 1.2rem;
+    }
+    section.articles article {
+      background: white;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    section.articles article:hover {
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    }
+    section.articles h2 {
+      margin: 0 0 0.4rem 0;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    section.articles a {
+      color: #2b6cb0;
+      text-decoration: none;
+    }
+    section.articles a:hover {
+      text-decoration: underline;
+    }
+    section.articles p {
+      margin: 0.5rem 0 0.8rem 0;
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    section.articles .meta {
+      font-size: 0.85rem;
+      color: #718096;
+    }
+    footer {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #a0aec0;
+      background-color: #f7fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Digital Systems Analysis</h1>
-  <section class="articles">
-    <article>
-      <h2><a href="articles/hiring-systems/index.html">Untitled</a></h2>
-      <p></p>
-      <p>Published: </p>
-    </article>
-  </section>
+  <header>
+    <h1>Digital Systems Analysis</h1>
+    <p>Personal articles on tech, systems, and society</p>
+  </header>
+  <main>
+    <section class="articles">
+      <article>
+  <h2><a href="articles/hiring-systems/index.html">hiring systems</a></h2>
+  <p>No description available.</p>
+  <p class="meta">Published: 2025-07-23</p>
+</article>
+
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Amer Alkojjeh
+  </footer>
 </body>
 </html>
