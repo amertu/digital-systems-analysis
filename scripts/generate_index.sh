@@ -1,36 +1,140 @@
-OUTPUT_FILE="output/index.html"
+#!/bin/bash
 
-cat <<EOF > "$OUTPUT_FILE"
+set -e
+
+OUTPUT_DIR="output"
+ARTICLE_DIR="articles"
+OUTPUT_FILE="$OUTPUT_DIR/index.html"
+
+mkdir -p "$OUTPUT_DIR"
+
+article_list=""
+
+# Collect all articles with metadata
+for article_path in "$ARTICLE_DIR"/*; do
+  if [[ -d "$article_path" ]]; then
+    slug=$(basename "$article_path")
+    title=""
+    description=""
+    date=""
+
+    # Parse metadata
+    if [[ -f "$article_path/metadata.txt" ]]; then
+      while IFS='=' read -r key value; do
+        case "$key" in
+          title) title="$value" ;;
+          description) description="$value" ;;
+          date) date="$value" ;;
+        esac
+      done < "$article_path/metadata.txt"
+    fi
+
+    [[ -z "$title" ]] && title="${slug//-/ }"
+    [[ -z "$description" ]] && description="No description available."
+    [[ -z "$date" ]] && date=$(date +"%Y-%m-%d")
+
+    article_list+="<article>
+  <h2><a href=\"articles/$slug/index.html\">$title</a></h2>
+  <p>$description</p>
+  <p class=\"meta\">Published: $date</p>
+</article>
+"
+  fi
+done
+
+# Generate index.html with embedded template
+cat > "$OUTPUT_FILE" <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Digital Systems Analysis</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #1a202c;
+    }
+    main { flex: 1 0 auto; max-width: 900px; margin: 2rem auto 3rem auto; padding: 0 1rem; }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      background-color: #2d3748;
+      color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+    }
+    header h1 { margin: 0; font-weight: 700; font-size: 2.5rem; }
+    header p {
+      margin-top: 0.3rem;
+      font-style: italic;
+      font-weight: 300;
+      color: #a0aec0;
+      font-size: 1.2rem;
+    }
+    section.articles article {
+      background: white;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    section.articles article:hover {
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+    }
+    section.articles h2 {
+      margin: 0 0 0.4rem 0;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    section.articles a {
+      color: #2b6cb0;
+      text-decoration: none;
+    }
+    section.articles a:hover {
+      text-decoration: underline;
+    }
+    section.articles p {
+      margin: 0.5rem 0 0.8rem 0;
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    section.articles .meta {
+      font-size: 0.85rem;
+      color: #718096;
+    }
+    footer {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #a0aec0;
+      background-color: #f7fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Digital Systems Analysis</h1>
-  <section class="articles">
-EOF
-
-for dir in output/articles/*; do
-  [ -d "$dir" ] || continue
-  title=$(sed -n '1p' "${dir}/title.txt" 2>/dev/null || echo "Untitled")
-  desc=$(sed -n '2p' "${dir}/title.txt" 2>/dev/null || echo "")
-  date=$(sed -n '3p' "${dir}/title.txt" 2>/dev/null || echo "")
-  art_link=$(basename "$dir")/index.html
-
-  cat <<EOF >> "$OUTPUT_FILE"
-    <article>
-      <h2><a href="articles/$art_link">$title</a></h2>
-      <p>$desc</p>
-      <p>Published: $date</p>
-    </article>
-EOF
-done
-
-cat <<EOF >> "$OUTPUT_FILE"
-  </section>
+  <header>
+    <h1>Digital Systems Analysis</h1>
+    <p>Personal articles on tech, systems, and society</p>
+  </header>
+  <main>
+    <section class="articles">
+      $article_list
+    </section>
+  </main>
+  <footer>
+    &copy; $(date +%Y) Amer Alkojjeh
+  </footer>
 </body>
 </html>
 EOF
+
+echo "✅ Generated $OUTPUT_FILE"
