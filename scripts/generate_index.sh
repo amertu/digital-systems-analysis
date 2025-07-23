@@ -20,13 +20,20 @@ for article_path in "$ARTICLE_DIR"/*; do
 
     # Parse metadata
     if [[ -f "$article_path/metadata.txt" ]]; then
-      while IFS='=' read -r key value; do
-        case "$key" in
-          title) title="$value" ;;
-          description) description="$value" ;;
-          date) date="$value" ;;
-        esac
-      done < "$article_path/metadata.txt"
+    while IFS='=' read -r key value || [[ -n "$key" ]]; do
+      key=$(echo "$key" | tr -d '\r' | xargs)
+      value=$(echo "$value" | tr -d '\r' | xargs)
+
+      echo "DEBUG: key='$key' value='$value'" >&2
+      # Remove any leading or trailing whitespace
+      case "$key" in
+        title) title="$value" ;;
+        description) description="$value" ;;
+        date) date="$value" ;;
+      esac
+    done < "$article_path/metadata.txt"
+
+
     fi
 
     [[ -z "$title" ]] && title="${slug//-/ }"
