@@ -43,6 +43,9 @@ jobs:
       - name: Generate index.html
         run: ./scripts/generate_index.sh
 
+      - name: Copy static assets
+        run: cp style.css output/style.css
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
