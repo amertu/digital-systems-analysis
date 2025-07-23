@@ -20,7 +20,7 @@ jobs:
 
       - name: Clone Overleaf articles from list
         env:
-          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_GIT_TOKEN }}
         run: ./scripts/clone_overleaf_articles.sh
 
       - name: Install dependencies
