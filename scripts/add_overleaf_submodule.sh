@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Usage:
+# Usage: for local usage, run the script with two arguments:
 # ./add_overleaf_submodule.sh <overleaf-git-url> <folder-name>
 
 OVERLEAF_URL="$1"
