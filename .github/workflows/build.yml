@@ -38,7 +38,7 @@ jobs:
         run: ./scripts/convert_articles.sh
 
       - name: Make clone script executable
-        run: chmod +x ./scripts/generate_index.sh.sh
+        run: chmod +x ./scripts/generate_index.sh
 
       - name: Generate index.html
         run: ./scripts/generate_index.sh
