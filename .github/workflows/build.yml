@@ -1,28 +1,47 @@
-name: Build and Deploy Articles
+name: Build & Deploy Articles
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required for pushing to gh-pages
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout main repo with submodules
+      - name: Checkout Main Repo
         uses: actions/checkout@v4
         with:
-          submodules: recursive
-          fetch-depth: 1
+          submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Pandoc
-        run: sudo apt-get install pandoc
+      - name: Authenticate and Init Submodules
+        run: |
+          git config --global url."https://git:${{ secrets.OVERLEAF_GIT_TOKEN }}@git.overleaf.com/".insteadOf "https://git@git.overleaf.com/"
+          git submodule sync --recursive
+          git submodule update --init --recursive --depth=1
 
-      - name: Build Articles
-        run: ./build-articles.sh
+      - name: Install Pandoc and TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
+
+      - name: Convert LaTeX to HTML
+        run: |
+          mkdir -p output
+          for dir in articles/*; do
+            name=$(basename "$dir")
+            if [[ -f "$dir/main.tex" ]]; then
+              pandoc "$dir/main.tex" -s -o "output/$name.html"
+            fi
+          done
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./output
