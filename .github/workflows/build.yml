@@ -46,6 +46,9 @@ jobs:
       - name: Copy static assets
         run: cp style.css output/style.css
 
+      - name: Disable Jekyll
+        run: touch output/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
