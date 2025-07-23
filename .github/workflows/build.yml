@@ -6,37 +6,37 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Required for pushing to gh-pages
+  contents: write  # needed to push to gh-pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Main Repo
+      - name: Checkout main repo (no submodules)
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: false
 
-      - name: Authenticate and Init Submodules
+      - name: Clone Overleaf article submodules manually
         run: |
-          git config --global url."https://git:${{ secrets.OVERLEAF_GIT_TOKEN }}@git.overleaf.com/".insteadOf "https://git@git.overleaf.com/"
-          git submodule sync --recursive
-          git submodule update --init --recursive --depth=1
+          mkdir -p articles
+          git clone https://git:${{ secrets.OVERLEAF_GIT_TOKEN }}@git.overleaf.com/68800ce728ec6c212c8353ee articles/hiring-systems
+          # Repeat for other articles here:
+          # git clone https://git:${{ secrets.OVERLEAF_GIT_TOKEN }}@git.overleaf.com/<project-id> articles/another-article
 
-      - name: Install Pandoc and TeX
+      - name: Install dependencies (pandoc, texlive)
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
 
-      - name: Convert LaTeX to HTML
+      - name: Convert LaTeX articles to HTML
         run: |
           mkdir -p output
-          for dir in articles/*; do
-            name=$(basename "$dir")
-            if [[ -f "$dir/main.tex" ]]; then
-              pandoc "$dir/main.tex" -s -o "output/$name.html"
+          for d in articles/*; do
+            if [ -f "$d/main.tex" ]; then
+              name=$(basename "$d")
+              pandoc "$d/main.tex" -s -o "output/${name}.html" --mathjax
             fi
           done
 
