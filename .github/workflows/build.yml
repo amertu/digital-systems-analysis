@@ -18,6 +18,9 @@ jobs:
         with:
           submodules: false
 
+      - name: Make clone script executable
+        run: chmod +x ./scripts/clone_overleaf_articles.sh
+
       - name: Clone Overleaf articles from list
         env:
           OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_GIT_TOKEN }}
@@ -28,8 +31,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
 
+      - name: Make clone script executable
+        run: chmod +x ./scripts/convert_articles.sh
+
       - name: Convert LaTeX to HTML
         run: ./scripts/convert_articles.sh
+
+      - name: Make clone script executable
+        run: chmod +x ./scripts/generate_index.sh.sh
 
       - name: Generate index.html
         run: ./scripts/generate_index.sh
