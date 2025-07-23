@@ -18,11 +18,10 @@ jobs:
         with:
           submodules: false
 
-      - name: Clone Overleaf articles manually
-        run: |
-          mkdir -p articles
-          git clone https://git:${{ secrets.OVERLEAF_TOKEN }}@git.overleaf.com/68800ce728ec6c212c8353ee articles/hiring-systems
-          # clone more if needed
+      - name: Clone Overleaf articles from list
+        env:
+          OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+        run: ./scripts/clone_overleaf_articles.sh
 
       - name: Install dependencies
         run: |
