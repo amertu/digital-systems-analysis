@@ -1,0 +1,86 @@
+# ========= Konfiguration =========
+SRC_DIR := articles
+OUT_DIR := output/articles
+MAIN_TEX := main.tex
+BIB_FILE := references.bib
+TEMPLATE := embedded-template.html
+CSL_FILE := apa.csl
+
+# ========= CSS für LaTeX-ähnliches Styling =========
+LATEX_CSS := "<style>\
+body { font-family: 'Latin Modern Roman', 'Computer Modern', serif; font-size: 14pt; line-height: 1.5; max-width: 650px; margin: auto; padding: 2em; color: #111; background: #fff; }\
+p { text-indent: 1.5em; margin-top: 0; margin-bottom: 1em; }\
+h1, h2, h3 { font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em; }\
+blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; color: #666; font-style: italic; }\
+code, pre { font-family: monospace; background-color: #f8f8f8; padding: 0.2em 0.4em; border-radius: 3px; }\
+</style>"
+
+# ========= Template-Inhalt =========
+TEMPLATE_CONTENT := \
+"<!DOCTYPE html>\n\
+<html lang=\"en\">\n\
+<head>\n\
+  <meta charset=\"utf-8\"/>\n\
+  <title>\\$title\\$</title>\n\
+  $(LATEX_CSS)\n\
+  <script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>\n\
+  <script src=\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>\n\
+</head>\n\
+<body>\n\
+\\$body\\$\n\
+</body>\n\
+</html>"
+
+.PHONY: all clean template html csl
+
+all: template csl html
+	@echo "✅ Alle Artikel erfolgreich gebaut."
+
+# Erzeugt das HTML-Template mit eingebettetem CSS + MathJax
+template:
+	@echo "📄 Erzeuge HTML-Template $(TEMPLATE)"
+	@echo -e $(TEMPLATE_CONTENT) > $(TEMPLATE)
+
+# Lädt die APA CSL-Datei (nur einmal, falls nicht lokal vorhanden)
+csl:
+	@if [ ! -f $(CSL_FILE) ]; then \
+		echo "📥 Lade APA CSL-Datei"; \
+		curl -sSL https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl -o $(CSL_FILE); \
+	else \
+		echo "CSL-Datei $(CSL_FILE) existiert bereits."; \
+	fi
+
+# Konvertiert alle Artikel in HTML mit Pandoc, Bibliografie & MathJax
+html:
+	@mkdir -p $(OUT_DIR)
+	@for dir in $(SRC_DIR)/*; do \
+		[ -d "$$dir" ] || continue; \
+		[ -f "$$dir/$(MAIN_TEX)" ] || continue; \
+		name=$$(basename $$dir); \
+		out_dir=$(OUT_DIR)/$$name; \
+		out_file=$$out_dir/index.html; \
+		mkdir -p $$out_dir; \
+		echo "🔄 Konvertiere $$name → $$out_file"; \
+		if [ -f "$$dir/$(BIB_FILE)" ]; then \
+			pandoc "$$dir/$(MAIN_TEX)" \
+				--citeproc \
+				--bibliography="$$dir/$(BIB_FILE)" \
+				--csl=$(CSL_FILE) \
+				-s \
+				--mathjax \
+				--template=$(TEMPLATE) \
+				--metadata title="$$name" \
+				-o "$$out_file"; \
+		else \
+			pandoc "$$dir/$(MAIN_TEX)" \
+				-s \
+				--mathjax \
+				--template=$(TEMPLATE) \
+				--metadata title="$$name" \
+				-o "$$out_file"; \
+		fi \
+	done
+
+clean:
+	@echo "🧹 Bereinige generierte Dateien"
+	@rm -rf $(OUT_DIR) $(TEMPLATE) $(CSL_FILE)

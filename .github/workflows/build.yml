@@ -44,12 +44,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
+          sudo apt-get install -y pandoc texlive-latex-base texlive-bibtex-extra texlive-fonts-recommended texlive-lang-european biber curl lmodern
 
       - name: Convert LaTeX to HTML
-        run: |
-          chmod +x ./scripts/convert_articles.sh
-          ./scripts/convert_articles.sh
+        run: make -f ./scripts/MakeFile.build-articles all
 
       - name: Generate index.html
         run: |
