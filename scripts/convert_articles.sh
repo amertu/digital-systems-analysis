@@ -46,7 +46,8 @@ cat <<EOF > "$TEMPLATE_FILE"
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-\$body\$
+  <h1>\$title\$</h1>
+  \$body\$
 </body>
 </html>
 EOF
@@ -73,6 +74,8 @@ for dir in "$SRC_DIR"/*; do
       --mathjax \
       --template="$TEMPLATE_FILE" \
       --metadata title="$name" \
+      --metadata lang=en \
+      --reference-section-title=References \
       -o "$out_file"
   else
     pandoc "$dir/$MAIN_TEX" \
