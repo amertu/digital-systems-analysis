@@ -3,6 +3,8 @@ name: Build & Deploy Articles
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '*/30 * * * *'  # every 30 minutes
   workflow_dispatch:
 
 permissions:
@@ -26,8 +28,15 @@ jobs:
           OVERLEAF_GIT_TOKEN: ${{ secrets.OVERLEAF_GIT_TOKEN }}
         run: ./scripts/clone_overleaf_articles.sh
 
-      - name: Debug folder content
-        run: ls -R articles
+      - name: Check if Overleaf articles changed
+        id: check_overleaf_changes
+        run: ./scripts/check_changes.sh
+
+      - name: Skip workflow if no Overleaf changes
+        if: steps.check_overleaf_changes.outputs.changed == 'false'
+        run: |
+          echo "No changes detected in Overleaf articles, stopping workflow gracefully."
+          exit 0  # Exit step normally; no error
 
       - name: Install dependencies
         run: |
