@@ -1,15 +1,18 @@
 #!/bin/bash
 set -e
 
-# Create required folders
-mkdir -p output/articles
-mkdir -p css templates
+# ========== CONFIGURABLE VARIABLES ==========
+SRC_DIR="articles"
+OUT_DIR="output/articles"
+MAIN_TEX="main.tex"
+BIB_FILE="references.bib"
+TEMPLATE_FILE="embedded-template.html"
 
-# Create default CSS if missing
-if [ ! -f css/latex-style.css ]; then
-  cat <<EOF > css/latex-style.css
+# ========== STYLE ==========
+LATEX_CSS=$(cat <<'EOF'
+<style>
 body {
-  font-family: "Latin Modern Roman", serif;
+  font-family: "Latin Modern Roman", Georgia, serif;
   font-size: 14px;
   line-height: 1.6;
   max-width: 700px;
@@ -25,19 +28,20 @@ h1, h2, h3 {
 section {
   margin-bottom: 2em;
 }
+</style>
 EOF
-  echo "Created css/latex-style.css"
-fi
+)
 
-# Create default HTML template if missing
-if [ ! -f templates/latex-to-html.html ]; then
-  cat <<EOF > templates/latex-to-html.html
+# ========== TEMPLATE GENERATION ==========
+mkdir -p "$OUT_DIR"
+
+cat <<EOF > "$TEMPLATE_FILE"
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <title>\$title\$</title>
-  <link rel="stylesheet" href="../../css/latex-style.css"/>
+  $LATEX_CSS
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -46,36 +50,38 @@ if [ ! -f templates/latex-to-html.html ]; then
 </body>
 </html>
 EOF
-  echo "Created templates/latex-to-html.html"
-fi
 
-# Convert each article
-for d in articles/*; do
-  if [ -f "$d/main.tex" ]; then
-    name=$(basename "$d")
-    outdir="output/articles/$name"
-    mkdir -p "$outdir"
-    echo "Converting $name..."
+# ========== CONVERT ARTICLES ==========
+mkdir -p "$OUT_DIR"
 
-    # Check for refs.bib
-    if [ -f "$d/refs.bib" ]; then
-      pandoc "$d/main.tex" \
-        --citeproc \
-        --bibliography="$d/refs.bib" \
-        -s \
-        --mathjax \
-        --template=templates/latex-to-html.html \
-        --metadata title="$name" \
-        -o "$outdir/index.html"
-    else
-      pandoc "$d/main.tex" \
-        -s \
-        --mathjax \
-        --template=templates/latex-to-html.html \
-        --metadata title="$name" \
-        -o "$outdir/index.html"
-    fi
+for dir in "$SRC_DIR"/*; do
+  [ -d "$dir" ] || continue
+  [ -f "$dir/$MAIN_TEX" ] || continue
+
+  name=$(basename "$dir")
+  out_dir="$OUT_DIR/$name"
+  out_file="$out_dir/index.html"
+  mkdir -p "$out_dir"
+
+  echo "🔄 Converting $name → $out_file"
+
+  if [ -f "$dir/$BIB_FILE" ]; then
+    pandoc "$dir/$MAIN_TEX" \
+      --citeproc \
+      --bibliography="$dir/$BIB_FILE" \
+      -s \
+      --mathjax \
+      --template="$TEMPLATE_FILE" \
+      --metadata title="$name" \
+      -o "$out_file"
+  else
+    pandoc "$dir/$MAIN_TEX" \
+      -s \
+      --mathjax \
+      --template="$TEMPLATE_FILE" \
+      --metadata title="$name" \
+      -o "$out_file"
   fi
 done
 
-echo "✅ Done. HTML files are in output/articles/"
+echo "✅ Done: All HTML articles are in $OUT_DIR/"
