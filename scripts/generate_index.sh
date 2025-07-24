@@ -59,7 +59,6 @@ for article_path in "$ARTICLE_DIR"/*; do
 
     year_groups[$year]+="$article_html\n"
   fi
-
 done
 
 # Sort years descending
@@ -67,9 +66,8 @@ sorted_years=$(printf "%s\n" "${!year_groups[@]}" | sort -r)
 
 article_list=""
 for year in $sorted_years; do
-  article_list+=$'\n<h2>'"$year"'</h2>\n<section class="articles">\n'"${year_groups[$year]}"'</section>\n'
+  article_list+=$'\n<h2 class="year-heading">'"$year"'</h2>\n<section class="articles">\n'"${year_groups[$year]}"'</section>\n'
 done
-
 
 # Generate index.html with embedded template
 cat > "$OUTPUT_FILE" <<EOF
@@ -104,6 +102,17 @@ cat > "$OUTPUT_FILE" <<EOF
       font-weight: 300;
       color: #a0aec0;
       font-size: 1.2rem;
+    }
+    #search-input {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      margin: 1rem auto 2rem auto;
+      padding: 0.5rem 1rem;
+      font-size: 1.1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.1);
     }
     section.articles article {
       background: white;
@@ -155,12 +164,41 @@ cat > "$OUTPUT_FILE" <<EOF
     <h1>Digital Systems Analysis</h1>
     <p>Personal articles on tech, systems, and society</p>
   </header>
+
   <main>
-  $(echo -e "$article_list")
+    <input type="text" id="search-input" placeholder="Search articles..." aria-label="Search articles" />
+    $(echo -e "$article_list")
   </main>
+
   <footer>
     &copy; $(date +%Y) Amer Alkojjeh
   </footer>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      const articles = document.querySelectorAll('section.articles article');
+      articles.forEach(article => {
+        const text = article.textContent.toLowerCase();
+        article.style.display = text.includes(filter) ? '' : 'none';
+      });
+
+      // Hide year heading if no articles visible in that section
+      const yearSections = document.querySelectorAll('section.articles');
+      yearSections.forEach(section => {
+        const visibleArticles = Array.from(section.querySelectorAll('article')).filter(a => a.style.display !== 'none');
+        const yearHeading = section.previousElementSibling; // <h2> before the section
+        if (visibleArticles.length === 0) {
+          if (yearHeading) yearHeading.style.display = 'none';
+          section.style.display = 'none';
+        } else {
+          if (yearHeading) yearHeading.style.display = '';
+          section.style.display = '';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 EOF
