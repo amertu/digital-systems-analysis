@@ -47,7 +47,9 @@ jobs:
           sudo apt-get install -y pandoc texlive-latex-base texlive-bibtex-extra texlive-fonts-recommended texlive-lang-european biber curl lmodern
 
       - name: Convert LaTeX to HTML
-        run: make -f ./scripts/MakeFile.build-articles all
+        run: |
+          chmod +x ./scripts/convert_articles.sh
+          ./scripts/convert_articles.sh
 
       - name: Generate index.html
         run: |

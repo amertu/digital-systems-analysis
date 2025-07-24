@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-# ========== CONFIGURABLE VARIABLES ==========
+# ========== CONFIGURATION ==========
 SRC_DIR="articles"
 OUT_DIR="output/articles"
 MAIN_TEX="main.tex"
 BIB_FILE="references.bib"
 TEMPLATE_FILE="embedded-template.html"
 
-# ========== STYLE ==========
+# ========== EMBEDDED LATEX-LIKE STYLE ==========
 LATEX_CSS=$(cat <<'EOF'
 <style>
 body {
@@ -32,8 +32,8 @@ section {
 EOF
 )
 
-# ========== TEMPLATE GENERATION ==========
-mkdir -p "$OUT_DIR"
+# ========== CREATE TEMPLATE ==========
+mkdir -p "$(dirname "$TEMPLATE_FILE")"
 
 cat <<EOF > "$TEMPLATE_FILE"
 <!DOCTYPE html>
