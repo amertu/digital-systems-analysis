@@ -59,10 +59,22 @@ for dir in "$SRC_DIR"/*; do
   [ -d "$dir" ] || continue
   [ -f "$dir/$MAIN_TEX" ] || continue
 
+  meta_file="$dir/metadata.txt"
   name=$(basename "$dir")
   out_dir="$OUT_DIR/$name"
   out_file="$out_dir/index.html"
   mkdir -p "$out_dir"
+
+  metadata_args=()
+  if [ -f "$meta_file" ]; then
+    while IFS='=' read -r key val; do
+      key=$(echo "$key" | xargs)
+      val=$(echo "$val" | xargs)
+      [ -n "$key" ] && metadata_args+=(--metadata "$key=$val")
+    done < "$meta_file"
+  else
+    metadata_args+=(--metadata title="$name")
+  fi
 
   echo "🔄 Converting $name → $out_file"
 
@@ -70,16 +82,17 @@ for dir in "$SRC_DIR"/*; do
     pandoc "$dir/$MAIN_TEX" \
       --citeproc \
       --bibliography="$dir/$BIB_FILE" \
-      -s \
+      --standalone \
+      --wrap=auto \
       --mathjax \
       --template="$TEMPLATE_FILE" \
-      --metadata title="$name" \
       --metadata lang=en \
-      --reference-section-title=References \
+      "${metadata_args[@]}" \
       -o "$out_file"
   else
     pandoc "$dir/$MAIN_TEX" \
-      -s \
+      --standalone \
+      --wrap=auto \
       --mathjax \
       --template="$TEMPLATE_FILE" \
       --metadata title="$name" \
