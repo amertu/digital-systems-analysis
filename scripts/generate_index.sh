@@ -8,7 +8,7 @@ OUTPUT_FILE="$OUTPUT_DIR/index.html"
 
 mkdir -p "$OUTPUT_DIR"
 
-article_list=""
+declare -A year_groups
 
 # Collect all articles with metadata
 for article_path in "$ARTICLE_DIR"/*; do
@@ -20,34 +20,56 @@ for article_path in "$ARTICLE_DIR"/*; do
 
     # Parse metadata
     if [[ -f "$article_path/metadata.txt" ]]; then
-    while IFS='=' read -r key value || [[ -n "$key" ]]; do
-      key=$(echo "$key" | tr -d '\r' | xargs)
-      value=$(echo "$value" | tr -d '\r' | xargs)
-
-      echo "DEBUG: key='$key' value='$value'" >&2
-      # Remove any leading or trailing whitespace
-      case "$key" in
-        title) title="$value" ;;
-        description) description="$value" ;;
-        date) date="$value" ;;
-      esac
-    done < "$article_path/metadata.txt"
-
-
+      while IFS='=' read -r key value || [[ -n "$key" ]]; do
+        key=$(echo "$key" | tr -d '\r' | xargs)
+        value=$(echo "$value" | tr -d '\r' | xargs)
+        case "$key" in
+          title) title="$value" ;;
+          description) description="$value" ;;
+          date) date="$value" ;;
+        esac
+      done < "$article_path/metadata.txt"
     fi
 
     [[ -z "$title" ]] && title="${slug//-/ }"
     [[ -z "$description" ]] && description="No description available."
     [[ -z "$date" ]] && date=$(date +"%Y-%m-%d")
 
-    article_list+="<article>
+    # Read time estimation
+    read_time=""
+    html_file="$article_path/index.html"
+    if [[ -f "$html_file" ]]; then
+      word_count=$(lynx -dump -nolist "$html_file" 2>/dev/null | wc -w)
+      if [[ $word_count -gt 0 ]]; then
+        read_time=$(awk -v words="$word_count" 'BEGIN { print int((words + 199) / 200) }')
+      else
+        read_time=1
+      fi
+    else
+      read_time=1
+    fi
+
+    year=$(echo "$date" | cut -d'-' -f1)
+
+    article_html="<article>
   <h2><a href=\"articles/$slug/index.html\">$title</a></h2>
   <p>$description</p>
-  <p class=\"meta\">Published: $date</p>
-</article>
-"
+  <p class=\"meta\">Published: $date &bull; Read time: ${read_time} min</p>
+</article>"
+
+    year_groups[$year]+="$article_html\n"
   fi
+
 done
+
+# Sort years descending
+sorted_years=$(printf "%s\n" "${!year_groups[@]}" | sort -r)
+
+article_list=""
+for year in $sorted_years; do
+  article_list+=$'\n<h2>'"$year"'</h2>\n<section class="articles">\n'"${year_groups[$year]}"'</section>\n'
+done
+
 
 # Generate index.html with embedded template
 cat > "$OUTPUT_FILE" <<EOF
@@ -95,9 +117,10 @@ cat > "$OUTPUT_FILE" <<EOF
       box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
     }
     section.articles h2 {
-      margin: 0 0 0.4rem 0;
-      font-weight: 600;
-      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #2d3748;
     }
     section.articles a {
       color: #2b6cb0;
@@ -133,9 +156,7 @@ cat > "$OUTPUT_FILE" <<EOF
     <p>Personal articles on tech, systems, and society</p>
   </header>
   <main>
-    <section class="articles">
-      $article_list
-    </section>
+    $article_list
   </main>
   <footer>
     &copy; $(date +%Y) Amer Alkojjeh
