@@ -28,6 +28,9 @@ jobs:
           OVERLEAF_GIT_TOKEN: ${{ secrets.OVERLEAF_GIT_TOKEN }}
         run: ./scripts/clone_overleaf_articles.sh
 
+      - name: Make check overleaf executable
+        run: chmod +x ./scripts/check_changes.sh
+
       - name: Check if Overleaf articles changed
         id: check_overleaf_changes
         run: ./scripts/check_changes.sh
