@@ -156,7 +156,7 @@ cat > "$OUTPUT_FILE" <<EOF
     <p>Personal articles on tech, systems, and society</p>
   </header>
   <main>
-    $article_list
+  $(echo -e "$article_list")
   </main>
   <footer>
     &copy; $(date +%Y) Amer Alkojjeh
