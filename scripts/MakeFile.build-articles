@@ -15,22 +15,6 @@ blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 1em; col
 code, pre { font-family: monospace; background-color: #f8f8f8; padding: 0.2em 0.4em; border-radius: 3px; }\
 </style>"
 
-# ========= Template-Inhalt =========
-TEMPLATE_CONTENT := \
-"<!DOCTYPE html>\n\
-<html lang=\"en\">\n\
-<head>\n\
-  <meta charset=\"utf-8\"/>\n\
-  <title>\\$title\\$</title>\n\
-  $(LATEX_CSS)\n\
-  <script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>\n\
-  <script src=\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>\n\
-</head>\n\
-<body>\n\
-\\$body\\$\n\
-</body>\n\
-</html>"
-
 .PHONY: all clean template html csl
 
 all: template csl html
@@ -39,7 +23,21 @@ all: template csl html
 # Erzeugt das HTML-Template mit eingebettetem CSS + MathJax
 template:
 	@echo "📄 Erzeuge HTML-Template $(TEMPLATE)"
-	@echo -e $(TEMPLATE_CONTENT) > $(TEMPLATE)
+	@cat > $(TEMPLATE) <<EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>\$title\$</title>
+  $(LATEX_CSS)
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+\$body\$
+</body>
+</html>
+EOF
 
 # Lädt die APA CSL-Datei (nur einmal, falls nicht lokal vorhanden)
 csl:
@@ -78,7 +76,7 @@ html:
 				--template=$(TEMPLATE) \
 				--metadata title="$$name" \
 				-o "$$out_file"; \
-		fi \
+		fi; \
 	done
 
 clean:
