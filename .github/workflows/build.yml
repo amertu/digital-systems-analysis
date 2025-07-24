@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main repo (no submodules)
+      - name: Checkout repo with submodules
         uses: actions/checkout@v4
         with:
-          submodules: false
+          submodules: recursive
 
       - name: Make clone script executable
         run: chmod +x ./scripts/clone_overleaf_articles.sh
@@ -26,22 +26,23 @@ jobs:
           OVERLEAF_GIT_TOKEN: ${{ secrets.OVERLEAF_GIT_TOKEN }}
         run: ./scripts/clone_overleaf_articles.sh
 
+      - name: Debug folder content
+        run: ls -R articles
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-lang-european lmodern
 
-      - name: Make convert script executable
-        run: chmod +x ./scripts/convert_articles.sh
-
       - name: Convert LaTeX to HTML
-        run: ./scripts/convert_articles.sh
-
-      - name: Make generate index script executable
-        run: chmod +x ./scripts/generate_index.sh
+        run: |
+          chmod +x ./scripts/convert_articles.sh
+          ./scripts/convert_articles.sh
 
       - name: Generate index.html
-        run: ./scripts/generate_index.sh
+        run: |
+          chmod +x ./scripts/generate_index.sh
+          ./scripts/generate_index.sh
 
       - name: Disable Jekyll on GitHub Pages
         run: touch output/.nojekyll
