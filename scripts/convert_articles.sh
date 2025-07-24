@@ -87,6 +87,7 @@ for dir in "$SRC_DIR"/*; do
       --mathjax \
       --template="$TEMPLATE_FILE" \
       --metadata lang=en \
+      --metadata reference-section-title="References" \
       "${metadata_args[@]}" \
       -o "$out_file"
   else
