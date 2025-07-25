@@ -6,99 +6,63 @@ SRC_DIR="articles"
 OUT_DIR="output/articles"
 MAIN_TEX="main.tex"
 BIB_FILE="references.bib"
-TEMPLATE_FILE="embedded-template.html"
+META_FILE="metadata.json"
+CSL_FILE="apa.csl"
+TEMPLATE_FILE="scrartcl-template.html"
+CONFIG_SUBDIR="config"
 
-# ========== EMBEDDED LATEX-LIKE STYLE ==========
-LATEX_CSS=$(cat <<'EOF'
-<style>
-body {
-  font-family: "Latin Modern Roman", Georgia, serif;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: auto;
-  padding: 2em;
-  background: #fff;
-  color: #111;
-}
-h1, h2, h3 {
-  font-weight: bold;
-  margin-top: 1.5em;
-}
-section {
-  margin-bottom: 2em;
-}
-</style>
-EOF
-)
-
-# ========== CREATE TEMPLATE ==========
-mkdir -p "$(dirname "$TEMPLATE_FILE")"
-
-cat <<EOF > "$TEMPLATE_FILE"
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>\$title\$</title>
-  $LATEX_CSS
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-  <h1>\$title\$</h1>
-  \$body\$
-</body>
-</html>
-EOF
-
-# ========== CONVERT ARTICLES ==========
+# ========== CREATE OUTPUT DIR ==========
 mkdir -p "$OUT_DIR"
 
 for dir in "$SRC_DIR"/*; do
   [ -d "$dir" ] || continue
   [ -f "$dir/$MAIN_TEX" ] || continue
 
-  meta_file="$dir/metadata.txt"
   name=$(basename "$dir")
   out_dir="$OUT_DIR/$name"
   out_file="$out_dir/index.html"
   mkdir -p "$out_dir"
 
+  # Set paths to config files
+  config_dir="$dir/$CONFIG_SUBDIR"
+  meta_data="$config_dir/$META_FILE"
+  csl_file="$config_dir/$CSL_FILE"
+  template_file="$config_dir/$TEMPLATE_FILE"
+  bib_file="$dir/$BIB_FILE"
+
+  echo "Metadata file: ${meta_data}"
+  # Load metadata from JSON
   metadata_args=()
-  if [ -f "$meta_file" ]; then
-    while IFS='=' read -r key val; do
-      key=$(echo "$key" | xargs)
-      val=$(echo "$val" | xargs)
-      [ -n "$key" ] && metadata_args+=(--metadata "$key=$val")
-    done < "$meta_file"
-  else
-    metadata_args+=(--metadata title="$name")
+  if [ -f "$meta_data" ]; then
+  while IFS=$'\t' read -r key val; do
+    val=$(echo "$val" | tr -d '\r\n' | xargs)
+    if [[ -n "$val" && "$val" != "null" ]]; then
+      metadata_args+=(--metadata "$key=$val")
+    fi
+  done < <(jq -r 'to_entries | .[] | "\(.key)\t\(.value)"' "$meta_data")
   fi
 
   echo "🔄 Converting $name → $out_file"
 
-  if [ -f "$dir/$BIB_FILE" ]; then
-    pandoc "$dir/$MAIN_TEX" \
-      --citeproc \
-      --bibliography="$dir/$BIB_FILE" \
-      --standalone \
-      --wrap=auto \
-      --mathjax \
-      --template="$TEMPLATE_FILE" \
-      --metadata lang=en \
-      --metadata reference-section-title="References" \
-      "${metadata_args[@]}" \
-      -o "$out_file"
-  else
-    pandoc "$dir/$MAIN_TEX" \
-      --standalone \
-      --wrap=auto \
-      --mathjax \
-      --template="$TEMPLATE_FILE" \
-      --metadata title="$name" \
-      -o "$out_file"
+  # Build pandoc command
+  pandoc_args=(
+    "$dir/$MAIN_TEX"
+    --standalone
+    --wrap=auto
+    --mathjax
+    --template="$template_file"
+    --shift-heading-level-by=1
+    "${metadata_args[@]}"
+    --toc
+    -o "$out_file"
+  )
+
+  if [ -f "$bib_file" ]; then
+    pandoc_args+=(--citeproc --bibliography="$bib_file" --metadata link-citations=true)
+    [ -f "$csl_file" ] && pandoc_args+=(--csl="$csl_file")
   fi
+
+  pandoc "${pandoc_args[@]}"
 done
 
 echo "✅ Done: All HTML articles are in $OUT_DIR/"
