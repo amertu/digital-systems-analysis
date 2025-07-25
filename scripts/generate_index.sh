@@ -9,8 +9,6 @@ OUTPUT_FILE="$OUTPUT_DIR/index.html"
 mkdir -p "$OUTPUT_DIR"
 
 declare -A year_groups
-
-# Collect all articles with metadata
 for article_path in "$ARTICLE_DIR"/*; do
   if [[ -d "$article_path" ]]; then
     slug=$(basename "$article_path")
@@ -18,17 +16,11 @@ for article_path in "$ARTICLE_DIR"/*; do
     description=""
     date=""
 
-    # Parse metadata
-    if [[ -f "$article_path/metadata.txt" ]]; then
-      while IFS='=' read -r key value || [[ -n "$key" ]]; do
-        key=$(echo "$key" | tr -d '\r' | xargs)
-        value=$(echo "$value" | tr -d '\r' | xargs)
-        case "$key" in
-          title) title="$value" ;;
-          description) description="$value" ;;
-          date) date="$value" ;;
-        esac
-      done < "$article_path/metadata.txt"
+    # Parse metadata.json if exists
+    if [[ -f "$article_path/metadata.json" ]]; then
+      title=$(jq -r '.title // empty' "$article_path/metadata.json")
+      description=$(jq -r '.description // empty' "$article_path/metadata.json")
+      date=$(jq -r '.date // empty' "$article_path/metadata.json")
     fi
 
     [[ -z "$title" ]] && title="${slug//-/ }"
