@@ -2,138 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Broken Hiring Systems</title>
+  <title>The Structural Flaws in Modern Tech Hiring</title>
   <style>
-body {
-  font-family: "Latin Modern Roman", Georgia, serif;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: auto;
-  padding: 2em;
-  background: #fff;
-  color: #111;
-}
-h1, h2, h3 {
-  font-weight: bold;
-  margin-top: 1.5em;
-}
-section {
-  margin-bottom: 2em;
-}
-</style>
+    .abstract {
+      margin: 2em 0;               
+      font-size: 0.9em;            
+      text-align: justify;    
+      line-height: 1.4;         
+      max-width: 600px;            
+      margin-left: auto;
+      margin-right: auto;    
+      color: #333333;        
+    }
+
+    .abstract-heading {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1em;           
+      margin-bottom: 0.5em;      
+      font-family: serif;         
+    }
+    body {
+      font-family: "Latin Modern Roman", Georgia, serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #111;
+      max-width: 700px;
+      margin: 3em auto;
+      padding: 0 1em;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #0066cc;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 0.2em;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .author, .date {
+      font-size: 20px;
+      color: #555;
+      text-align: center;
+      font-style: normal;
+      margin-bottom: 0.5em;
+    }
+
+    #refs {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+    .csl-entry {
+      margin-left: 2em;
+      text-indent: -2em;
+    }
+    .csl-bib-body {
+      font-size: 0.95em;
+      line-height: 1.5;
+      margin-top: 3em;
+      padding-top: 1em;
+      border-top: 1px solid #ccc;
+    }
+  </style>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <h1>Broken Hiring Systems</h1>
-  <h1 class="unnumbered" id="introduction">Introduction</h1>
-  <p>test The persistent dysfunction in how tech hiring
-  operates—particularly in Europe—reflects deeper structural issues
-  beyond surface-level inefficiencies. While some attribute the decline
-  in software engineering demand to automation and AI, this perspective
-  overlooks a more fundamental problem: the flawed conceptual
-  foundations of modern hiring systems.</p>
-  <h1 class="unnumbered" id="hiring-as-a-mechanical-process">Hiring as a
-  Mechanical Process</h1>
-  <p>Many companies treat hiring not as a strategic, core function but
-  as a process to be modularized, outsourced, or automated. Decisions
-  are often made without sufficient involvement from engineering
-  leadership, which is brought in too late, if at all. Hiring processes
-  are driven by funnel metrics like time-to-hire, pipeline conversion,
-  and cost-per-hire, which prioritize throughput over thoughtful team
-  building and long-term value creation <span class="citation"
-  data-cites="muller2018tyranny ton2014goodjobs">(Muller 2018; Ton
-  2014)</span>.</p>
-  <h1 class="unnumbered"
-  id="mechanistic-roots-and-taylorist-logic">Mechanistic Roots and
-  Taylorist Logic</h1>
-  <p>This fixation on efficiency and abstraction is not new. It reflects
-  an outdated logic rooted in industrial-era principles of scientific
-  management—what has been referred to as “digital Taylorism” <span
-  class="citation" data-cites="mitev2021digitaltaylorism">(Mitev and
-  Venters 2021)</span>. These models, originally designed for repetitive
-  factory work, have been adapted—often uncritically—to knowledge work
-  contexts like software engineering. As a result, hiring systems
-  prioritize standardization, predictability, and risk-aversion, even in
-  roles that demand adaptability and creativity <span class="citation"
-  data-cites="buchanan2019organizational">(Buchanan and Huczynski
-  2019)</span>.</p>
-  <h1 class="unnumbered" id="the-platformization-of-hiring">The
-  Platformization of Hiring</h1>
-  <p>Hiring in tech has increasingly been absorbed into platform-based
-  systems that reduce complex candidate profiles into keyword filters
-  and ranking scores. This shift furthers the detachment of labor from
-  context, as companies rely on algorithmic systems that obscure value
-  and introduce bias <span class="citation"
-  data-cites="gray2019ghostwork jones2021work graeber2018bullshit">(Gray
-  and Suri 2019; Jones 2021; Graeber 2018)</span>. Referrals and
-  internal networks become key gatekeepers, bypassing formal structures
-  altogether—a process confirmed by LinkedIn’s own economic reports
-  <span class="citation" data-cites="linkedin2020trends">(Graph
-  2020)</span>.</p>
-  <h1 class="unnumbered" id="a-system-that-cannot-learn">A System That
-  Cannot Learn</h1>
-  <p>The result is a hiring ecosystem that does not merely make poor
-  choices—it fails to learn from them. Because it was not designed for
-  reflective adaptation but for cost-efficient filtering, meaningful
-  feedback loops are absent. The dominance of KPIs creates what Muller
-  calls a “tyranny of metrics,” where data replaces judgment and
-  visibility overrides understanding <span class="citation"
-  data-cites="muller2018tyranny">(Muller 2018)</span>.</p>
-  <h1 class="unnumbered" id="conclusion">Conclusion</h1>
-  <p>Modern tech hiring systems are not broken because of automation or
-  a lack of qualified talent. They are failing by design—guided by
-  legacy assumptions that reduce people to inputs, obscure strategic
-  thinking, and prioritize process over purpose. Until hiring is
-  reclaimed as a core human and organizational function, the system will
-  continue to filter out not just bad fits, but often the best ones.</p>
-  <h1 class="unnumbered" id="references">References</h1>
-  <h1 class="unnumbered" id="bibliography">References</h1>
-  <div id="refs" class="references csl-bib-body hanging-indent"
-  data-entry-spacing="0" role="list">
-  <div id="ref-buchanan2019organizational" class="csl-entry"
-  role="listitem">
-  Buchanan, David A, and Andrzej Huczynski. 2019. <em>Organizational
-  Behaviour</em>. 10th ed. Pearson Education Limited.
+  <h1 class="title">The Structural Flaws in Modern Tech Hiring</h1>
+  <div class="author">Amer Alkojjeh</div>
+  <div class="date" style="margin-bottom: 3em;">July 25, 2025</div>
+    <div class="abstract">
+    <div class="abstract-heading">Abstract</div>
+    <p>Modern tech hiring fails not due to AI or a lack of talent, but
+    because it’s driven by industrial-era logic unfit for knowledge
+    work. Companies optimize for efficiency outsourcing decisions,
+    automating assessments, and measuring success by funnel metrics. AI
+    systems don’t fix this they reinforce it, scaling bias and masking
+    poor judgment behind algorithmic objectivity. Hiring has become a
+    mechanical process that filters out complexity and creativity. This
+    article argues for reclaiming hiring as a strategic, human-led
+    function focused on long-term value, not short-term throughput.</p>
   </div>
-  <div id="ref-graeber2018bullshit" class="csl-entry" role="listitem">
-  Graeber, David. 2018. <em>Bullshit Jobs: A Theory</em>. Simon;
-  Schuster.
-  </div>
-  <div id="ref-linkedin2020trends" class="csl-entry" role="listitem">
-  Graph, LinkedIn Economic. 2020. <span>“Global Talent Trends
-  2020.”</span> <a
-  href="https://economicgraph.linkedin.com/research/global-talent-trends-2020"
-  class="uri">https://economicgraph.linkedin.com/research/global-talent-trends-2020</a>.
-  </div>
-  <div id="ref-gray2019ghostwork" class="csl-entry" role="listitem">
-  Gray, Mary, and Siddharth Suri. 2019. <em>Ghost Work: How to Stop
-  Silicon Valley from Building a New Global Underclass</em>. Houghton
-  Mifflin Harcourt.
-  </div>
-  <div id="ref-jones2021work" class="csl-entry" role="listitem">
-  Jones, Phil. 2021. <em>Work Without the Worker: Labour in the Age of
-  Platform Capitalism</em>. Verso Books.
-  </div>
-  <div id="ref-mitev2021digitaltaylorism" class="csl-entry"
-  role="listitem">
-  Mitev, Nathalie, and Will Venters. 2021. <span>“Revisiting Digital
-  Taylorism Through the Lens of Datafication: Algorithmic Management,
-  Labour Control and the Challenge of Resistance.”</span>
-  <em>Information and Organization</em> 31 (4): 100380. <a
-  href="https://doi.org/10.1016/j.infoandorg.2021.100380">https://doi.org/10.1016/j.infoandorg.2021.100380</a>.
-  </div>
-  <div id="ref-muller2018tyranny" class="csl-entry" role="listitem">
-  Muller, Jerry. 2018. <em>The Tyranny of Metrics</em>. <a
-  href="https://doi.org/10.2307/j.ctvc77h85">https://doi.org/10.2307/j.ctvc77h85</a>.
-  </div>
-  <div id="ref-ton2014goodjobs" class="csl-entry" role="listitem">
-  Ton, Zeynep. 2014. <em>The Good Jobs Strategy: How the Smartest
-  Companies Invest in Employees to Lower Costs and Boost Profits</em>.
-  Unabridged. <span>BrillianceAudio</span> on Compact Disc. Grand Haven,
-  Michigan: Brilliance Audio.
-  </div>
-  </div>
+    <h2 class="unnumbered" id="introduction">Introduction</h2>
+    <p>test The persistent dysfunction in how tech hiring
+    operates—particularly in Europe—reflects deeper structural issues
+    beyond surface-level inefficiencies. While some attribute the
+    decline in software engineering demand to automation and AI, this
+    perspective overlooks a more fundamental problem: the flawed
+    conceptual foundations of modern hiring systems.</p>
+    <h2 class="unnumbered" id="hiring-as-a-mechanical-process">Hiring as
+    a Mechanical Process</h2>
+    <p>Many companies treat hiring not as a strategic, core function but
+    as a process to be modularized, outsourced, or automated. Decisions
+    are often made without sufficient involvement from engineering
+    leadership, which is brought in too late, if at all. Hiring
+    processes are driven by funnel metrics like time-to-hire, pipeline
+    conversion, and cost-per-hire, which prioritize throughput over
+    thoughtful team building and long-term value creation <span
+    class="citation" data-cites="muller2018tyranny ton2014goodjobs">(<a
+    href="#ref-muller2018tyranny" role="doc-biblioref">Muller, 2018</a>;
+    <a href="#ref-ton2014goodjobs" role="doc-biblioref">Ton,
+    2014</a>)</span>.</p>
+    <h2 class="unnumbered"
+    id="mechanistic-roots-and-taylorist-logic">Mechanistic Roots and
+    Taylorist Logic</h2>
+    <p>This fixation on efficiency and abstraction is not new. It
+    reflects an outdated logic rooted in industrial-era principles of
+    scientific management—what has been referred to as “digital
+    Taylorism” <span class="citation"
+    data-cites="mitev2021digitaltaylorism">(<a
+    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev
+    &amp; Venters, 2021</a>)</span>. These models, originally designed
+    for repetitive factory work, have been adapted—often uncritically—to
+    knowledge work contexts like software engineering. As a result,
+    hiring systems prioritize standardization, predictability, and
+    risk-aversion, even in roles that demand adaptability and creativity
+    <span class="citation" data-cites="buchanan2019organizational">(<a
+    href="#ref-buchanan2019organizational" role="doc-biblioref">Buchanan
+    &amp; Huczynski, 2019</a>)</span>.</p>
+    <h2 class="unnumbered" id="the-platformization-of-hiring">The
+    Platformization of Hiring</h2>
+    <p>Hiring in tech has increasingly been absorbed into platform-based
+    systems that reduce complex candidate profiles into keyword filters
+    and ranking scores. This shift furthers the detachment of labor from
+    context, as companies rely on algorithmic systems that obscure value
+    and introduce bias <span class="citation"
+    data-cites="gray2019ghostwork jones2021work graeber2018bullshit">(<a
+    href="#ref-graeber2018bullshit" role="doc-biblioref">Graeber,
+    2018</a>; <a href="#ref-gray2019ghostwork" role="doc-biblioref">Gray
+    &amp; Suri, 2019</a>; <a href="#ref-jones2021work"
+    role="doc-biblioref">Jones, 2021</a>)</span>. Referrals and internal
+    networks become key gatekeepers, bypassing formal structures
+    altogether—a process confirmed by LinkedIn’s own economic reports
+    <span class="citation" data-cites="linkedin2020trends">(<a
+    href="#ref-linkedin2020trends" role="doc-biblioref">Graph,
+    2020</a>)</span>.</p>
+    <h2 class="unnumbered" id="a-system-that-cannot-learn">A System That
+    Cannot Learn</h2>
+    <p>The result is a hiring ecosystem that does not merely make poor
+    choices—it fails to learn from them. Because it was not designed for
+    reflective adaptation but for cost-efficient filtering, meaningful
+    feedback loops are absent. The dominance of KPIs creates what Muller
+    calls a “tyranny of metrics,” where data replaces judgment and
+    visibility overrides understanding <span class="citation"
+    data-cites="muller2018tyranny">(<a href="#ref-muller2018tyranny"
+    role="doc-biblioref">Muller, 2018</a>)</span>.</p>
+    <h2 class="unnumbered" id="conclusion">Conclusion</h2>
+    <p>Modern tech hiring systems are not broken because of automation
+    or a lack of qualified talent. They are failing by design—guided by
+    legacy assumptions that reduce people to inputs, obscure strategic
+    thinking, and prioritize process over purpose. Until hiring is
+    reclaimed as a core human and organizational function, the system
+    will continue to filter out not just bad fits, but often the best
+    ones.</p>
+    <h2 class="unnumbered" id="references">References</h2>
+    <div id="refs" class="references csl-bib-body hanging-indent"
+    data-entry-spacing="0" data-line-spacing="2" role="list">
+    <div id="ref-buchanan2019organizational" class="csl-entry"
+    role="listitem">
+    Buchanan, D. A., &amp; Huczynski, A. (2019). <em>Organizational
+    behaviour</em> (10th ed.). Pearson Education Limited.
+    </div>
+    <div id="ref-graeber2018bullshit" class="csl-entry" role="listitem">
+    Graeber, D. (2018). <em>Bullshit jobs: A theory</em>. Simon;
+    Schuster.
+    </div>
+    <div id="ref-linkedin2020trends" class="csl-entry" role="listitem">
+    Graph, L. E. (2020). <em>Global talent trends 2020</em>. <a
+    href="https://economicgraph.linkedin.com/research/global-talent-trends-2020"
+    class="uri">https://economicgraph.linkedin.com/research/global-talent-trends-2020</a>.
+    </div>
+    <div id="ref-gray2019ghostwork" class="csl-entry" role="listitem">
+    Gray, M., &amp; Suri, S. (2019). <em>Ghost work: How to stop silicon
+    valley from building a new global underclass</em>. Houghton Mifflin
+    Harcourt.
+    </div>
+    <div id="ref-jones2021work" class="csl-entry" role="listitem">
+    Jones, P. (2021). <em>Work without the worker: Labour in the age of
+    platform capitalism</em>. Verso Books.
+    </div>
+    <div id="ref-mitev2021digitaltaylorism" class="csl-entry"
+    role="listitem">
+    Mitev, N., &amp; Venters, W. (2021). Revisiting digital taylorism
+    through the lens of datafication: Algorithmic management, labour
+    control and the challenge of resistance. <em>Information and
+    Organization</em>, <em>31</em>(4), 100380. <a
+    href="https://doi.org/10.1016/j.infoandorg.2021.100380">https://doi.org/10.1016/j.infoandorg.2021.100380</a>
+    </div>
+    <div id="ref-muller2018tyranny" class="csl-entry" role="listitem">
+    Muller, J. (2018). <em>The tyranny of metrics</em>. <a
+    href="https://doi.org/10.2307/j.ctvc77h85">https://doi.org/10.2307/j.ctvc77h85</a>
+    </div>
+    <div id="ref-ton2014goodjobs" class="csl-entry" role="listitem">
+    Ton, Z. (2014). <em>The good jobs strategy: How the smartest
+    companies invest in employees to lower costs and boost profits</em>
+    (Unabridged.). Brilliance Audio.
+    </div>
+    </div>
 </body>
 </html>
