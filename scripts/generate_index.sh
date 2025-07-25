@@ -175,6 +175,15 @@ cat > "$OUTPUT_FILE" <<EOF
     &copy; $(date +%Y) Amer Alkojjeh
   </footer>
 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY4R9HJVCY"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WY4R9HJVCY');
+  </script>
+
   <script>
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', () => {
