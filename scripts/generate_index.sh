@@ -3,25 +3,31 @@
 set -e
 
 OUTPUT_DIR="output"
-ARTICLE_DIR="articles"
+SRC_DIR="articles"
 OUTPUT_FILE="$OUTPUT_DIR/index.html"
+CONFIG_SUBDIR="config"
+META_FILE="metadata.json"
 
 mkdir -p "$OUTPUT_DIR"
 
 declare -A year_groups
-for article_path in "$ARTICLE_DIR"/*; do
-  if [[ -d "$article_path" ]]; then
-    slug=$(basename "$article_path")
+for dir in "$SRC_DIR"/*; do
+  [ -d "$dir" ] || continue
+  config_dir="$dir/$CONFIG_SUBDIR"
+  meta_data="$config_dir/$META_FILE"
+
+  if [[ -f "$meta_data" ]]; then
+    slug=$(basename "$dir")
     title=""
     description=""
     date=""
 
-    # Parse metadata.json if exists
-    if [[ -f "$article_path/metadata.json" ]]; then
-      title=$(jq -r '.title // empty' "$article_path/metadata.json")
-      description=$(jq -r '.description // empty' "$article_path/metadata.json")
-      date=$(jq -r '.date // empty' "$article_path/metadata.json")
-    fi
+    title=$(jq -r '.title // empty' "$meta_data")
+    description=$(jq -r '.description // empty' "$meta_data")
+    date=$(jq -r '.date // empty' "$meta_data")
+    echo "title: $title"
+    echo "description: $description"
+    echo "date: $date"
 
     [[ -z "$title" ]] && title="${slug//-/ }"
     [[ -z "$description" ]] && description="No description available."
@@ -29,7 +35,7 @@ for article_path in "$ARTICLE_DIR"/*; do
 
     # Read time estimation
     read_time=""
-    html_file="$article_path/index.html"
+    html_file="$dir/index.html"
     if [[ -f "$html_file" ]]; then
       word_count=$(lynx -dump -nolist "$html_file" 2>/dev/null | wc -w)
       if [[ $word_count -gt 0 ]]; then
@@ -41,7 +47,10 @@ for article_path in "$ARTICLE_DIR"/*; do
       read_time=1
     fi
 
-    year=$(echo "$date" | cut -d'-' -f1)
+    if ! year=$(date -d "$date" +%Y 2>/dev/null); then
+      echo "⚠️  Invalid date format in $meta_data: $date"
+      year="unknown"
+    fi
 
     article_html="<article>
   <h2><a href=\"articles/$slug/index.html\">$title</a></h2>
