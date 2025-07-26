@@ -3,49 +3,52 @@
 set -e
 
 OUTPUT_DIR="output"
-SRC_DIR="articles"
-OUTPUT_FILE="$OUTPUT_DIR/index.html"
-CONFIG_SUBDIR="config"
-META_FILE="metadata.json"
+OUTPUT_ARTICLES_DIR="$OUTPUT_DIR/articles"
+OUTPUT_MAIN_FILE="$OUTPUT_DIR/index.html"
+ARTICLE_META_FILE="metadata.json"
 
 mkdir -p "$OUTPUT_DIR"
 
-declare -A year_groups
-for dir in "$SRC_DIR"/*; do
-  [ -d "$dir" ] || continue
-  config_dir="$dir/$CONFIG_SUBDIR"
-  meta_data="$config_dir/$META_FILE"
+  declare -A year_groups
+  for dir in "$OUTPUT_ARTICLES_DIR"/*; do
+    echo "Processing directory: $dir"
+    [ -d "$dir" ] || continue
 
-  if [[ -f "$meta_data" ]]; then
-    slug=$(basename "$dir")
-    title=""
-    description=""
-    date=""
-
-    title=$(jq -r '.title // empty' "$meta_data")
-    description=$(jq -r '.description // empty' "$meta_data")
-    date=$(jq -r '.date // empty' "$meta_data")
-    echo "title: $title"
-    echo "description: $description"
-    echo "date: $date"
-
-    [[ -z "$title" ]] && title="${slug//-/ }"
-    [[ -z "$description" ]] && description="No description available."
-    [[ -z "$date" ]] && date=$(date +"%Y-%m-%d")
-
-    # Read time estimation
-    read_time=""
+    meta_data="$dir/$ARTICLE_META_FILE"
     html_file="$dir/index.html"
+    slug=$(basename "$dir")
+
+    # Default values
+    title="${slug//-/ }"
+    description="No description available."
+    date=$(date +"%Y-%m-%d")
+    read_time=1
+
+    echo "Load metadata if available"
+    if [[ -f "$meta_data" ]]; then
+      title=$(jq -r '.title // empty' "$meta_data")
+      description=$(jq -r '.description // empty' "$meta_data")
+      date=$(jq -r '.date // empty' "$meta_data")
+    else
+      echo "⚠️  No metadata for $slug"
+    fi
+
+    echo "Read time estimation"
+
     if [[ -f "$html_file" ]]; then
-      word_count=$(lynx -dump -nolist "$html_file" 2>/dev/null | wc -w)
-      if [[ $word_count -gt 0 ]]; then
-        read_time=$(awk -v words="$word_count" 'BEGIN { print int((words + 199) / 200) }')
-      else
-        read_time=1
+      text=$(lynx -dump -nolist "$html_file" 2>/dev/null || true)
+      if [[ -n "$text" ]]; then
+        word_count=$(echo "$text" | wc -w)
+        if [[ $word_count -gt 0 ]]; then
+          read_time=$(awk -v words="$word_count" 'BEGIN { print int((words + 199) / 200) }')
+        fi
       fi
     else
-      read_time=1
+      echo "⚠️  No HTML for $slug"
+      continue
     fi
+
+    echo "Read time: $read_time min"
 
     if ! year=$(date -d "$date" +%Y 2>/dev/null); then
       echo "⚠️  Invalid date format in $meta_data: $date"
@@ -53,16 +56,15 @@ for dir in "$SRC_DIR"/*; do
     fi
 
     article_html="<article>
-  <h2><a href=\"articles/$slug/index.html\">$title</a></h2>
-  <p>$description</p>
-  <p class=\"meta\">Published: $date &bull; Read time: ${read_time} min</p>
-</article>"
+      <h2><a href=\"articles/$slug/index.html\">$title</a></h2>
+      <p>$description</p>
+      <p class=\"meta\">Published: $date &bull; Read time: ${read_time} min</p>
+      </article>"
 
-    year_groups[$year]+="$article_html\n"
-  fi
-done
+    year_groups[$year]+="$article_html"$'\n'
+  done
 
-# Sort years descending
+echo "Sort years descending"
 sorted_years=$(printf "%s\n" "${!year_groups[@]}" | sort -r)
 
 article_list=""
@@ -71,7 +73,7 @@ for year in $sorted_years; do
 done
 
 # Generate index.html with embedded template
-cat > "$OUTPUT_FILE" <<EOF
+cat > "$OUTPUT_MAIN_FILE" <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,4 +215,4 @@ cat > "$OUTPUT_FILE" <<EOF
 </html>
 EOF
 
-echo "✅ Generated $OUTPUT_FILE"
+echo "✅ Generated $OUTPUT_MAIN_FILE"

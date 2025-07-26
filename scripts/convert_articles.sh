@@ -20,7 +20,8 @@ for dir in "$SRC_DIR"/*; do
 
   name=$(basename "$dir")
   out_dir="$OUT_DIR/$name"
-  out_file="$out_dir/index.html"
+  out_index_file="$out_dir/index.html"
+  out_metadata_file="$out_dir/metadata.json"
   mkdir -p "$out_dir"
 
   # Set paths to config files
@@ -34,6 +35,7 @@ for dir in "$SRC_DIR"/*; do
   # Load metadata from JSON
   metadata_args=()
   if [ -f "$meta_data" ]; then
+  cp "$meta_data" "$out_metadata_file"
   while IFS=$'\t' read -r key val; do
     val=$(echo "$val" | tr -d '\r\n' | xargs)
     if [[ -n "$val" && "$val" != "null" ]]; then
@@ -42,7 +44,7 @@ for dir in "$SRC_DIR"/*; do
   done < <(jq -r 'to_entries | .[] | "\(.key)\t\(.value)"' "$meta_data")
   fi
 
-  echo "🔄 Converting $name → $out_file"
+  echo "🔄 Converting $name → $out_index_file"
 
   # Build pandoc command
   pandoc_args=(
@@ -54,7 +56,7 @@ for dir in "$SRC_DIR"/*; do
     --shift-heading-level-by=1
     "${metadata_args[@]}"
     --toc
-    -o "$out_file"
+    -o "$out_index_file"
   )
 
   if [ -f "$bib_file" ]; then
