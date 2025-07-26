@@ -41,13 +41,10 @@ jobs:
           echo "No changes detected in Overleaf articles, stopping workflow gracefully."
           exit 0  # Exit step normally; no error
 
-      - name: Install dependencies and lynx
-        run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base texlive-bibtex-extra texlive-fonts-recommended texlive-lang-european biber curl lmodern lynx
-
-      - name: Install Pandoc (latest)
+      - name: Install dependencies
         run: |
-          wget https://github.com/jgm/pandoc/releases/download/3.7.0.2/pandoc-3.7.0.2-1-amd64.deb
-          sudo dpkg -i pandoc-3.7.0.2-1-amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-base texlive-bibtex-extra texlive-fonts-recommended texlive-lang-european biber curl lmodern lynx
 
       - name: Convert LaTeX to HTML
         run: |
