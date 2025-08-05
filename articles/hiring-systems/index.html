@@ -103,19 +103,26 @@
     <div class="abstract-heading">Abstract</div>
     <p>Recent studies and critiques suggest that modern tech hiring
     faces structural challenges rooted in legacy industrial management
-    practices and neoliberal economic frameworks <span class="citation"
+    practices and neoliberal economic frameworks. The process often
+    translates multifaceted human potential into quantifiable proxies <a
+    href="#fn1" class="footnote-ref" id="fnref1"
+    role="doc-noteref"><sup>1</sup></a>, relying on platform ecosystems
+    and algorithmic filters that tend to prioritize speed, risk
+    minimization, and conformity over creativity and long-term value
+    <span class="citation"
     data-cites="ajunwa2016hiring harvey2005neoliberalism">(<a
     href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
     2016</a>; <a href="#ref-harvey2005neoliberalism"
-    role="doc-biblioref">Harvey, 2005</a>)</span>. The process reduces
-    complex human potential to quantifiable proxies, relying on platform
-    ecosystems and algorithmic filters that prioritize speed, risk
-    avoidance, and conformity over creativity and long-term value. These
-    systems obscure bias, fail to learn from outcomes, and
-    systematically exclude diverse talent. This article argues for
-    reclaiming hiring as a strategic, adaptive, and human-centered
-    function essential for building resilient, innovative tech
-    teams.</p>
+    role="doc-biblioref">Harvey, 2005</a>)</span>. These systems may
+    obscure bias, lack outcome-driven feedback, and inadvertently
+    disadvantage diverse talent <span class="citation"
+    data-cites="pasquale2015blackbox ajunwa2016hiring">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-pasquale2015blackbox"
+    role="doc-biblioref">Pasquale, 2015</a>)</span>. This article
+    discusses key areas in hiring system design, arguing for a
+    strategic, adaptive, and human-centered approach essential for
+    building resilient and innovative tech teams.</p>
     <p><strong>Keywords:</strong> Tech Hiring, Algorithmic Bias,
     Quantified Work, Digital Taylorism, Recruitment Platforms, Hiring
     Metrics, Developer Visibility, Structural Inequality, Black-Box
@@ -128,316 +135,324 @@
     data-cites="gray2019ghostwork srnicek2017platform">(<a
     href="#ref-gray2019ghostwork" role="doc-biblioref">Gray &amp; Suri,
     2019</a>; <a href="#ref-srnicek2017platform"
-    role="doc-biblioref">Srnicek, 2017</a>)</span>. It gamifies and
-    quantifies candidate skills through proxies like scores,
-    credentials, GitHub stars, and HackerRank rankings. This process
-    prioritizes minimizing short-term risk over maximizing long-term
-    value.</p>
-    <p>Far from objective, this logic is shaped by the same extractive
-    mechanisms that drive modern platform capitalism <span
-    class="citation"
-    data-cites="srnicek2017platform zuboff2019surveillance">(<a
-    href="#ref-srnicek2017platform" role="doc-biblioref">Srnicek,
-    2017</a>; <a href="#ref-zuboff2019surveillance"
-    role="doc-biblioref">Zuboff, 2019</a>)</span>. Moreover, tech hiring
-    embodies “digital Taylorism” - the fragmentation of knowledge work
-    into discrete, surveilled, and standardized units optimized for
-    control and replaceability <span class="citation"
-    data-cites="moore2018quantified pasquale2015blackbox">(<a
-    href="#ref-moore2018quantified" role="doc-biblioref">Moore,
-    2018</a>; <a href="#ref-pasquale2015blackbox"
-    role="doc-biblioref">Pasquale, 2015</a>)</span>.</p>
-    <p>Hiring is not broken by accident. It is the predictable outcome
-    of managerial priorities and technical infrastructures that
-    emphasize control, scale, and measurable conformity over creativity,
-    context, and real collaboration.</p>
-    <p>Until we address the structural misdesign of modern hiring
-    systems, surface-level reforms will amount to little more than
-    noise. Automation in hiring promised to remove bias and streamline
-    selection. But in displacing human judgment rather than supporting
-    it, these systems have created new forms of opacity and
-    rigidity.</p>
-    <p>This article examines the structural flaws in tech hiring by
-    exploring five key areas: the over-reliance on metrics, the
-    historical roots of mechanistic hiring, the rise of platform-based
-    evaluation, the lack of learning in hiring systems, and the urgent
-    need to reclaim hiring as a human-centered strategic function.</p>
-    <h2 class="unnumbered" id="conceptual-framework">Conceptual
-    Framework</h2>
-    <p>This article draws on critical theories of digital labor and
-    organizational studies to analyze modern tech hiring. The following
-    key concepts frame the discussion:</p>
-    <p><strong>Platform Capitalism</strong> describes an economic system
-    where digital platforms mediate, extract, and monetize interactions
-    between users, workers, and customers <span class="citation"
-    data-cites="srnicek2017platform">(<a href="#ref-srnicek2017platform"
-    role="doc-biblioref">Srnicek, 2017</a>)</span>. These platforms,
-    such as LinkedIn or GitHub, structure labor and market participation
-    through data-driven mechanisms.</p>
-    <p><strong>Surveillance Capitalism</strong> refers to the
-    commodification of personal data through pervasive monitoring and
-    behavioral prediction, as conceptualized by Zuboff <span
-    class="citation" data-cites="zuboff2019surveillance">(<a
-    href="#ref-zuboff2019surveillance" role="doc-biblioref">Zuboff,
-    2019</a>)</span>. In hiring, this entails continuous candidate
-    visibility and data extraction beyond traditional assessment.</p>
-    <p><strong>Digital Taylorism</strong> extends classical scientific
-    management principles <span class="citation"
-    data-cites="taylor1911principles">(<a
-    href="#ref-taylor1911principles" role="doc-biblioref">Taylor,
-    1911</a>)</span> into digital knowledge work by fragmenting tasks
-    into discrete, measurable units subject to algorithmic control and
-    performance monitoring <span class="citation"
-    data-cites="moore2018quantified mitev2021digitaltaylorism">(<a
-    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
-    2021</a>; <a href="#ref-moore2018quantified"
-    role="doc-biblioref">Moore, 2018</a>)</span>.</p>
-    <p><strong>Quantified Work</strong> denotes the practice of
-    measuring and evaluating knowledge labor through numerical
-    indicators such as commit counts, scores, or rankings <span
-    class="citation" data-cites="moore2018quantified">(<a
-    href="#ref-moore2018quantified" role="doc-biblioref">Moore,
-    2018</a>)</span>. While intended to increase transparency and
-    efficiency, it can produce new forms of control and pressure.</p>
-    <p><strong>Black-box Systems</strong> are algorithmic or automated
-    decision-making processes whose internal logic is opaque or
-    inaccessible to users and affected individuals <span
-    class="citation" data-cites="pasquale2015blackbox">(<a
-    href="#ref-pasquale2015blackbox" role="doc-biblioref">Pasquale,
-    2015</a>)</span>. These systems complicate accountability in hiring
-    by obscuring bias and criteria.</p>
-    <p><strong>Neoliberal Economic Logic</strong> prioritizes
-    market-driven efficiency, risk minimization, and cost reduction,
-    shaping managerial practices since the late 20th century <span
-    class="citation" data-cites="harvey2005neoliberalism">(<a
-    href="#ref-harvey2005neoliberalism" role="doc-biblioref">Harvey,
-    2005</a>)</span>. This logic underpins the mechanistic,
-    metric-focused hiring systems critiqued here.</p>
-    <p><strong>Applicant Tracking Systems (ATS)</strong> are software
-    platforms used by organizations to collect, parse, and rank job
-    applications based on keyword matching and pre-set criteria <span
-    class="citation" data-cites="ajunwa2016hiring">(<a
-    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
-    2016</a>)</span>. They mediate early-stage filtering but can
-    contribute to exclusionary effects.</p>
-    <p>To illustrate, <strong>GitHub stars</strong> are user-generated
-    indicators of popularity or endorsement on the GitHub platform,
-    signaling visibility and perceived project quality.
-    <strong>HackerRank</strong> is a coding challenge platform
-    frequently employed to assess programming skills through
-    standardized tests.</p>
-    <p>Understanding these terms clarifies how modern hiring processes
-    have evolved into complex, platform-mediated systems that emphasize
-    quantification, visibility, and algorithmic filtering—often at the
-    expense of nuanced human judgment.</p>
-    <h2 class="unnumbered"
-    id="quantification-and-the-metrics-trap">Quantification and the
-    Metrics Trap</h2>
-    <p>In modern tech hiring, data-driven methods are often hailed as
-    objective solutions to human bias. Companies increasingly rely on
-    metrics-based platforms and tools to evaluate, filter, and hire
-    candidates. GitHub stars, HackerRank scores, commit frequencies, and
-    contributions to open source projects are treated as proxies for
-    competence. Recruiters and automated systems alike evaluate
-    individuals through a narrow lens of quantifiable performance.</p>
-    <p>While appealing in theory, this approach carries substantial
-    risks. As <span class="citation"
-    data-cites="pasquale2015blackbox">(<a
-    href="#ref-pasquale2015blackbox" role="doc-biblioref">Pasquale,
-    2015</a>)</span> argues in The Black Box Society, the reliance on
-    opaque, algorithmic systems often entrenches bias under the guise of
-    neutrality. Evidence indicates that metrics used to evaluate
+    role="doc-biblioref">Srnicek, 2017</a>)</span>. For example,
+    candidate skills may be gamified and quantified through proxies such
+    as GitHub stars (popularity markers on a code-sharing platform),
+    HackerRank scores (results from coding challenge platforms), commit
+    frequencies, and open source contributions. Such metrics tend to
+    emphasize minimizing short-term risk rather than maximizing
+    long-term value.</p>
+    <p>Emerging research indicates that metrics used to evaluate
     developers can both reflect and influence perceptions of competence,
     potentially shaping work practices <span class="citation"
     data-cites="moore2018quantified pasquale2015blackbox">(<a
     href="#ref-moore2018quantified" role="doc-biblioref">Moore,
     2018</a>; <a href="#ref-pasquale2015blackbox"
-    role="doc-biblioref">Pasquale, 2015</a>)</span>. Developers learn to
-    game systems, optimize for visibility, and overproduce low-value
-    contributions just to remain legible to the system.</p>
-    <p><span class="citation" data-cites="moore2018quantified">(<a
-    href="#ref-moore2018quantified" role="doc-biblioref">Moore,
-    2018</a>)</span> highlights how such forms of "quantified work"
-    introduce new pressures. Software engineers, in particular, face the
-    precarity of being continuously measured. Their labor is not just
-    about problem-solving or design; it is now mediated through
-    dashboards, rankings, and scoreboards. These forms of visibility
-    foster anxiety, overwork, and a subtle form of digital
-    Taylorism.</p>
-    <p>More critically, these metrics favor those who can afford to be
-    publicly prolific. As <span class="citation"
-    data-cites="zuboff2019surveillance">(<a
-    href="#ref-zuboff2019surveillance" role="doc-biblioref">Zuboff,
-    2019</a>)</span> explains in The Age of Surveillance Capitalism,
-    platforms systematically reward visibility and data generation.
-    Developers with caregiving duties, from marginalized backgrounds, or
-    with limited free time are structurally disadvantaged in this
-    ecosystem. The quantification regime thus replicates existing
-    inequalities in the name of meritocracy.</p>
-    <p>Even when anonymized or automated, such systems fail to eliminate
-    bias. They simply obscure it behind complex scoring models and
-    technical language. The result is a labor market where being
-    machine-readable matters more than being competent, creative, or
-    thoughtful. The long-term risk is a distorted notion of merit that
-    undermines diversity, ethics, and real engineering excellence.</p>
-    <p>The pervasive reliance on quantifiable metrics and algorithmic
-    assessments in tech hiring is not an isolated phenomenon. Rather, it
-    is deeply rooted in historical management philosophies and economic
-    ideologies that have long shaped organizational practices. To fully
-    understand why hiring operates as a mechanized, transactional
-    process, we must trace its lineage back to the industrial principles
-    of scientific management and the neoliberal market reforms that
-    entrenched efficiency and risk aversion as paramount objectives.</p>
-    <h2 class="unnumbered" id="hiring-as-a-mechanical-process">Hiring as
-    a Mechanical Process</h2>
-    <p>The contemporary tech hiring landscape is deeply shaped by a
-    legacy of industrial-era management philosophies and the neoliberal
-    economic logic that has dominated since the late 20th century. The
-    foundational principles of scientific management, pioneered by
-    Frederick Taylor in the early 1900s, emphasized breaking down
-    complex tasks into discrete, measurable units to maximize efficiency
-    and minimize human variability <span class="citation"
-    data-cites="taylor1911principles">(<a
+    role="doc-biblioref">Pasquale, 2015</a>)</span>. This trend aligns
+    with what scholars describe as “digital Taylorism” — the extension
+    of Frederick Taylor’s scientific management principles <span
+    class="citation" data-cites="taylor1911principles">(<a
     href="#ref-taylor1911principles" role="doc-biblioref">Taylor,
-    1911</a>)</span>. While originally designed for factory labor, these
-    principles have persisted well beyond their industrial roots,
-    morphing into what modern scholars term “digital Taylorism” <span
-    class="citation" data-cites="mitev2021digitaltaylorism">(<a
+    1911</a>)</span> into digitally mediated knowledge work through
+    fragmentation and algorithmic control <span class="citation"
+    data-cites="moore2018quantified mitev2021digitaltaylorism">(<a
     href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
-    2021</a>)</span>.</p>
-    <p>In the context of tech hiring, this inherited mindset manifests
-    as a mechanical process: candidates are treated as inputs to be
-    filtered by standardized assessments, keyword searches, and
-    algorithmic rankings. The nuanced judgment that good hiring demands
-    is supplanted by a focus on throughput, speed, and risk
-    minimization. This shift was accelerated by neoliberal imperatives
-    from the 1980s onward, where outsourcing, lean management, and
-    cost-cutting became paramount <span class="citation"
-    data-cites="harvey2005neoliberalism">(<a
+    2021</a>; <a href="#ref-moore2018quantified"
+    role="doc-biblioref">Moore, 2018</a>)</span>.</p>
+    <p>Some researchers argue that current hiring limitations result
+    from managerial and technical infrastructures prioritizing control,
+    scalability, and standardization at the expense of creativity and
+    contextual understanding <span class="citation"
+    data-cites="ajunwa2016hiring mitev2021digitaltaylorism">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-mitev2021digitaltaylorism"
+    role="doc-biblioref">Mitev, 2021</a>)</span>.</p>
+    <p>Surface-level reforms to hiring systems may have limited impact
+    if the underlying structural misdesign remains unaddressed.
+    Automation in hiring was intended to reduce bias and streamline
+    selection, but in some cases has displaced nuanced human judgment
+    with opaque algorithmic decision-making, creating new challenges in
+    transparency and flexibility.</p>
+    <p>This article examines structural challenges in tech hiring by
+    exploring five key areas:</p>
+    <ol>
+    <li><p>The over-reliance on metrics,</p></li>
+    <li><p>The historical roots of mechanistic hiring,</p></li>
+    <li><p>The rise of platform-based evaluation,</p></li>
+    <li><p>The limited learning in hiring systems,</p></li>
+    <li><p>The potential benefits of reframing hiring as a strategic,
+    human-centered function.</p></li>
+    </ol>
+    <h2 class="unnumbered" id="theoretical-framework">Theoretical
+    Framework</h2>
+    <p>This article draws on several key theoretical concepts to analyze
+    structural issues in tech hiring.</p>
+    <p><strong>Surveillance Capitalism</strong> refers to the economic
+    logic by which personal data is commodified through pervasive
+    monitoring and behavioral prediction in digital environments. This
+    concept, developed by <span class="citation"
+    data-cites="zuboff2019surveillance">Zuboff (<a
+    href="#ref-zuboff2019surveillance"
+    role="doc-biblioref">2019</a>)</span>, explains how digital
+    platforms extract value from user visibility and data
+    generation.</p>
+    <p><strong>Digital Taylorism</strong> extends the principles of
+    early 20th-century scientific management (Taylorism) into digitally
+    mediated knowledge work. It involves fragmentation, standardization,
+    and algorithmic control of tasks, enabling increased monitoring and
+    optimization of labor <span class="citation"
+    data-cites="moore2018quantified mitev2021digitaltaylorism">(<a
+    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
+    2021</a>; <a href="#ref-moore2018quantified"
+    role="doc-biblioref">Moore, 2018</a>)</span>.</p>
+    <p><strong>Quantified Work</strong> describes the increasing
+    reliance on numerical indicators—such as scores, rankings, and
+    productivity metrics—to measure and evaluate knowledge labor. This
+    measurement regime can shape worker behavior and affect labor
+    conditions <span class="citation"
+    data-cites="moore2018quantified">(<a href="#ref-moore2018quantified"
+    role="doc-biblioref">Moore, 2018</a>)</span>.</p>
+    <p><strong>Neoliberalism</strong> denotes an economic and political
+    framework emphasizing market deregulation, privatization, and
+    efficiency, which has influenced managerial practices such as
+    outsourcing, cost-cutting, and risk minimization since the 1980s
+    <span class="citation" data-cites="harvey2005neoliberalism">(<a
     href="#ref-harvey2005neoliberalism" role="doc-biblioref">Harvey,
     2005</a>)</span>.</p>
-    <p>Consequently, hiring has evolved into a series of modular,
-    decontextualized steps; resume parsing by Applicant Tracking Systems
-    (ATS), automated coding challenges (e.g., HackerRank), and
-    standardized interviews—each optimized for measurable outputs rather
-    than strategic talent acquisition <span class="citation"
-    data-cites="ajunwa2016hiring">(<a href="#ref-ajunwa2016hiring"
-    role="doc-biblioref">Ajunwa et al., 2016</a>)</span>. Engineering
-    leaders are often sidelined, involved only late in the funnel, if at
-    all, further entrenching this mechanistic, transactional approach
-    <span class="citation" data-cites="mitev2021digitaltaylorism">(<a
-    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
-    2021</a>)</span>.</p>
-    <p>This process-centric model rewards conformity and penalizes
-    risk-taking or unconventional career paths, systematically filtering
-    out potentially valuable candidates who don’t fit predefined
-    templates <span class="citation"
-    data-cites="buchanan2019organizational">(<a
-    href="#ref-buchanan2019organizational" role="doc-biblioref">Buchanan
-    &amp; Dawson, 2019</a>)</span>. In essence, the tech hiring system
-    continues to operate on an outdated economic and managerial
-    framework, ill-suited for the complex, creative demands of software
-    engineering and knowledge work today.</p>
-    <h2 class="unnumbered" id="the-platformization-of-hiring">The
-    Platformization of Hiring</h2>
-    <p>In recent years, tech hiring has been increasingly absorbed into
-    platform ecosystems that commodify and automate the candidate
-    evaluation process. These platforms - ranging from LinkedIn and
-    GitHub to HackerRank and specialized Applicant Tracking Systems
-    (ATS) - reduce complex candidate profiles to algorithmically
-    sortable data points. This “platformization” detaches hiring
-    decisions from context, interpersonal nuance, and strategic thinking
-    <span class="citation"
-    data-cites="srnicek2017platform gray2019ghostwork">(<a
+    <p><strong>Scientific Management (Taylorism)</strong> is a
+    foundational management theory developed by Frederick Taylor in the
+    early 1900s, focused on maximizing efficiency by breaking work into
+    standardized, measurable units <span class="citation"
+    data-cites="taylor1911principles">(<a
+    href="#ref-taylor1911principles" role="doc-biblioref">Taylor,
+    1911</a>)</span>. Its principles persist in contemporary hiring
+    practices, particularly in algorithmic filtering and
+    standardization.</p>
+    <h2 class="unnumbered" id="related-work">Related Work</h2>
+    <p>Research on modern tech hiring increasingly highlights structural
+    and algorithmic challenges affecting fairness, efficiency, and
+    diversity. <span class="citation"
+    data-cites="ajunwa2016hiring">Ajunwa et al. (<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">2016</a>)</span>
+    document how automated hiring tools often embed bias and reinforce
+    exclusionary practices despite claims of neutrality. Similarly,
+    <span class="citation" data-cites="pasquale2015blackbox">Pasquale
+    (<a href="#ref-pasquale2015blackbox"
+    role="doc-biblioref">2015</a>)</span> analyze algorithmic opacity in
+    recruitment, showing how "black box" systems obscure decision logic
+    and prevent accountability.</p>
+    <p>Empirical studies on platform labor <span class="citation"
+    data-cites="gray2019ghostwork srnicek2017platform">(<a
     href="#ref-gray2019ghostwork" role="doc-biblioref">Gray &amp; Suri,
     2019</a>; <a href="#ref-srnicek2017platform"
-    role="doc-biblioref">Srnicek, 2017</a>)</span>.</p>
-    <p>Platforms standardize candidate information into keywords,
-    scores, and badges, which are then used by recruiters and automated
-    filters to rank and filter applicants <span class="citation"
-    data-cites="jones2021work">(<a href="#ref-jones2021work"
-    role="doc-biblioref">Jones et al., 2021</a>)</span>. While this can
-    increase efficiency and scale, it also introduces severe
-    limitations: critical traits like creativity, potential for growth,
-    and culture add. Moreover, platform algorithms often encode and
-    reproduce existing biases <span class="citation"
-    data-cites="graeber2018bullshit">(<a href="#ref-graeber2018bullshit"
-    role="doc-biblioref">Graeber, 2018</a>)</span>.</p>
-    <p>Referral networks and internal employee recommendations gain
-    outsized influence as informal gatekeepers in this platformized
-    ecosystem <span class="citation" data-cites="linkedin2020trends">(<a
-    href="#ref-linkedin2020trends" role="doc-biblioref">LinkedIn
-    Economic Graph, 2020</a>)</span>. These human networks can mitigate
-    some shortcomings of algorithmic filtering but also risk reinforcing
-    exclusionary practices and homogeneity.</p>
-    <p>The platform model incentivizes visibility and continuous data
-    generation, pressuring candidates to engage performatively on these
-    platforms to remain “legible.” This dynamic parallels broader trends
-    in surveillance capitalism, where digital labor is monetized through
-    data extraction and behavioral monitoring <span class="citation"
+    role="doc-biblioref">Srnicek, 2017</a>)</span> reveal how digital
+    work environments commodify worker visibility and data, creating
+    pressures analogous to those found in hiring platforms. <span
+    class="citation" data-cites="moore2018quantified">Moore (<a
+    href="#ref-moore2018quantified"
+    role="doc-biblioref">2018</a>)</span> conceptualize the “quantified
+    work” phenomenon, detailing how constant measurement reshapes labor
+    experiences and outcomes in knowledge industries.</p>
+    <p>Other researchers focus on the managerial and economic context:
+    <span class="citation" data-cites="harvey2005neoliberalism">Harvey
+    (<a href="#ref-harvey2005neoliberalism"
+    role="doc-biblioref">2005</a>)</span> discuss neoliberal reforms’
+    impact on organizational practices, emphasizing efficiency and risk
+    aversion that influence hiring mechanization<a href="#fn2"
+    class="footnote-ref" id="fnref2"
+    role="doc-noteref"><sup>2</sup></a>. <span class="citation"
+    data-cites="mitev2021digitaltaylorism">Mitev (<a
+    href="#ref-mitev2021digitaltaylorism"
+    role="doc-biblioref">2021</a>)</span> extend this to knowledge work,
+    arguing that “digital Taylorism” perpetuates fragmentation and
+    surveillance under new technological regimes.</p>
+    <p>While prior work often isolates specific elements such as bias or
+    platform dynamics, this article integrates these perspectives to
+    critically examine the interplay of metrics, platforms, managerial
+    ideology, and learning deficits in tech hiring systems. This
+    holistic approach aims to move beyond surface-level critiques toward
+    proposing strategic, human-centered alternatives.</p>
+    <h2 class="unnumbered"
+    id="quantification-and-the-metrics-trap">Quantification and the
+    Metrics Trap</h2>
+    <p>Data-driven hiring methods are often hailed as objective
+    solutions to human bias. Organizations increasingly rely on
+    metrics-based platforms and tools to evaluate, filter, and hire
+    candidates. While appealing in theory, evidence suggests that
+    metrics such as <a href="#fn3" class="footnote-ref" id="fnref3"
+    role="doc-noteref"><sup>3</sup></a> and HackerRank scores <a
+    href="#fn4" class="footnote-ref" id="fnref4"
+    role="doc-noteref"><sup>4</sup></a>, commit frequencies, and
+    contributions to open source projects do not merely reflect
+    competence but may shape candidate behavior and perceptions <span
+    class="citation"
+    data-cites="pasquale2015blackbox moore2018quantified">(<a
+    href="#ref-moore2018quantified" role="doc-biblioref">Moore,
+    2018</a>; <a href="#ref-pasquale2015blackbox"
+    role="doc-biblioref">Pasquale, 2015</a>)</span>.</p>
+    <p>For instance, some developers adapt to visibility-based
+    evaluation systems by optimizing for measurable metrics, which may
+    sometimes encourage quantity over quality <span class="citation"
+    data-cites="pasquale2015blackbox">(<a
+    href="#ref-pasquale2015blackbox" role="doc-biblioref">Pasquale,
+    2015</a>)</span>. The practice of “quantified work” introduces
+    pressures whereby engineers’ labor is mediated through dashboards,
+    rankings, and scoreboards, potentially fostering anxiety and
+    overwork <span class="citation" data-cites="moore2018quantified">(<a
+    href="#ref-moore2018quantified" role="doc-biblioref">Moore,
+    2018</a>)</span>.</p>
+    <p>Moreover, platform ecosystems tend to reward visibility and
+    continuous data production, which can structurally disadvantage
+    developers with caregiving responsibilities, marginalized
+    backgrounds, or limited free time <span class="citation"
+    data-cites="zuboff2019surveillance">(<a
+    href="#ref-zuboff2019surveillance" role="doc-biblioref">Zuboff,
+    2019</a>)</span>. Consequently, the quantification regime risks
+    replicating existing inequalities under the guise of
+    meritocracy.</p>
+    <p>Even anonymized or automated systems may fail to eliminate bias,
+    instead obscuring it behind complex scoring models and technical
+    language <span class="citation"
+    data-cites="pasquale2015blackbox">(<a
+    href="#ref-pasquale2015blackbox" role="doc-biblioref">Pasquale,
+    2015</a>)</span>. This can result in a labor market dynamic where
+    machine-readability<a href="#fn5" class="footnote-ref" id="fnref5"
+    role="doc-noteref"><sup>5</sup></a> is disproportionately valued
+    compared to creativity, thoughtful problem-solving, or nuanced
+    competence <span class="citation"
     data-cites="zuboff2019surveillance">(<a
     href="#ref-zuboff2019surveillance" role="doc-biblioref">Zuboff,
     2019</a>)</span>.</p>
-    <p>Ultimately, hiring platformization is a double-edged sword: it
-    can streamline processes and democratize access, but often at the
-    cost of reducing candidates to data points, undermining human
-    judgment and perpetuating systemic inequities.</p>
+    <p>Understanding these tendencies requires recognizing the
+    historical and economic contexts that shaped current hiring
+    practices.</p>
+    <h2 class="unnumbered" id="hiring-as-a-mechanical-process">Hiring as
+    a Mechanical Process</h2>
+    <p>Many aspects of contemporary tech hiring reflect economic and
+    managerial frameworks rooted in industrial-era scientific management
+    and neoliberal market reforms <span class="citation"
+    data-cites="taylor1911principles harvey2005neoliberalism">(<a
+    href="#ref-harvey2005neoliberalism" role="doc-biblioref">Harvey,
+    2005</a>; <a href="#ref-taylor1911principles"
+    role="doc-biblioref">Taylor, 1911</a>)</span>. Scientific management
+    emphasized breaking down complex tasks into discrete, measurable
+    units to maximize efficiency and minimize variability <span
+    class="citation" data-cites="taylor1911principles">(<a
+    href="#ref-taylor1911principles" role="doc-biblioref">Taylor,
+    1911</a>)</span>. Digital Taylorism extends these principles into
+    knowledge work through algorithmic monitoring and task fragmentation
+    <span class="citation" data-cites="mitev2021digitaltaylorism">(<a
+    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
+    2021</a>)</span>.</p>
+    <p>Within hiring, this results in mechanized processes where
+    candidates are treated as inputs filtered by standardized
+    assessments, keyword searches, and algorithmic rankings. Managerial
+    focus on throughput, speed, and risk reduction often supplants the
+    nuanced judgment required for effective talent acquisition <span
+    class="citation"
+    data-cites="ajunwa2016hiring mitev2021digitaltaylorism">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-mitev2021digitaltaylorism"
+    role="doc-biblioref">Mitev, 2021</a>)</span>.</p>
+    <p>The rise of neoliberal imperatives since the 1980s has emphasized
+    outsourcing, lean management, and cost-cutting, accelerating this
+    mechanization <span class="citation"
+    data-cites="harvey2005neoliberalism">(<a
+    href="#ref-harvey2005neoliberalism" role="doc-biblioref">Harvey,
+    2005</a>)</span>. Engineering leaders frequently engage late or
+    minimally in hiring decisions, reinforcing transactional approaches
+    <span class="citation" data-cites="mitev2021digitaltaylorism">(<a
+    href="#ref-mitev2021digitaltaylorism" role="doc-biblioref">Mitev,
+    2021</a>)</span>.</p>
+    <p>This modular, decontextualized model can systematically exclude
+    candidates who deviate from standardized templates, potentially
+    filtering out individuals with valuable, unconventional experience
+    <span class="citation" data-cites="buchanan2019organizational">(<a
+    href="#ref-buchanan2019organizational" role="doc-biblioref">Buchanan
+    &amp; Dawson, 2019</a>)</span>.</p>
+    <h2 class="unnumbered" id="the-platformization-of-hiring">The
+    Platformization of Hiring</h2>
+    <p>The absorption of hiring into platform ecosystems commodifies and
+    automates candidate evaluation <span class="citation"
+    data-cites="srnicek2017platform">(<a href="#ref-srnicek2017platform"
+    role="doc-biblioref">Srnicek, 2017</a>)</span>. Platforms like
+    LinkedIn, GitHub, HackerRank, and specialized Applicant Tracking
+    Systems (ATS)<a href="#fn6" class="footnote-ref" id="fnref6"
+    role="doc-noteref"><sup>6</sup></a> reduce complex profiles into
+    sortable data points such as keywords, scores, and badges <span
+    class="citation" data-cites="ajunwa2016hiring jones2021work">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-jones2021work" role="doc-biblioref">Jones et
+    al., 2021</a>)</span>. This detachment from context and
+    interpersonal nuance can limit assessments of creativity and growth
+    potential.</p>
+    <p>While internal referral networks<a href="#fn7"
+    class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>
+    sometimes offset algorithmic shortcomings, they may also reinforce
+    homogeneity and exclusionary practices<span class="citation"
+    data-cites="linkedin2020trends">(<a href="#ref-linkedin2020trends"
+    role="doc-biblioref">LinkedIn Economic Graph, 2020</a>)</span>.</p>
+    <p>Platform algorithms often incentivize continuous data generation
+    and increased candidate visibility, reflecting broader patterns
+    identified in surveillance capitalism research<span class="citation"
+    data-cites="zuboff2019surveillance">(<a
+    href="#ref-zuboff2019surveillance" role="doc-biblioref">Zuboff,
+    2019</a>)</span>.</p>
     <h2 class="unnumbered" id="a-system-that-cannot-learn">A System That
     Cannot Learn</h2>
-    <p>Despite the abundance of data collected throughout the hiring
-    funnel, modern tech hiring systems rarely incorporate genuine
-    feedback mechanisms that enable continuous learning and improvement.
-    Instead, the focus on metrics - such as time-to-hire, candidate
-    throughput, and funnel conversion rates - creates a rigid, linear
-    process that prioritizes speed and volume over reflection and
-    adaptation <span class="citation"
+    <p>Despite extensive data collection, many hiring systems
+    incorporate limited feedback loops for continuous learning. Metrics
+    such as time-to-hire and conversion rates emphasize throughput and
+    speed over reflection and adaptation <span class="citation"
     data-cites="muller2018tyranny pasquale2015blackbox">(<a
     href="#ref-muller2018tyranny" role="doc-biblioref">Muller, 2018</a>;
     <a href="#ref-pasquale2015blackbox" role="doc-biblioref">Pasquale,
     2015</a>)</span>.</p>
-    <p>This fixation on quantitative KPIs fosters what <span
-    class="citation" data-cites="muller2018tyranny">Muller (<a
-    href="#ref-muller2018tyranny" role="doc-biblioref">2018</a>)</span>
-    calls the “tyranny of metrics”: an environment where numerical
-    indicators replace nuanced judgment, and visibility is mistaken for
-    understanding. Such metrics offer a false sense of control while
-    obscuring the complex social and cognitive dynamics that underpin
-    effective hiring.</p>
-    <p>Furthermore, algorithmic hiring tools are often designed without
-    mechanisms to integrate long-term outcomes such as employee
-    performance, retention, or the ability to contribute to inclusive
-    team development. When these systems attempt to predict ‘culture
-    fit,’ they risk encoding subjective and exclusionary assumptions
-    <span class="citation" data-cites="ajunwa2016hiring">(<a
+    <p>Such a focus can create the “tyranny of metrics”<a href="#fn8"
+    class="footnote-ref" id="fnref8"
+    role="doc-noteref"><sup>8</sup></a>, where numerical indicators
+    supplant nuanced judgment <span class="citation"
+    data-cites="muller2018tyranny">(<a href="#ref-muller2018tyranny"
+    role="doc-biblioref">Muller, 2018</a>)</span>. Algorithmic tools
+    often lack mechanisms to integrate long-term outcomes like employee
+    performance or retention, and predictions of "culture fit"<a
+    href="#fn9" class="footnote-ref" id="fnref9"
+    role="doc-noteref"><sup>9</sup></a> risk perpetuating exclusionary
+    biases <span class="citation" data-cites="ajunwa2016hiring">(<a
     href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
     2016</a>)</span>.</p>
-    <p>The absence of reflexivity in these systems means organizations
-    fail to question whether their hiring processes truly select
-    candidates with meaningful potential, or merely those best suited to
-    pass automated filters.</p>
-    <p>To reclaim hiring as a strategic, human-centered function,
-    companies must build adaptive processes that integrate qualitative
-    feedback, embrace complexity, and prioritize long-term value over
-    short-term throughput.</p>
+    <p>The limited reflexivity of these systems may cause organizations
+    to select candidates suited to automated filters rather than those
+    with substantive potential.</p>
     <h2 class="unnumbered" id="conclusion">Conclusion</h2>
-    <p>Modern tech hiring systems are failing not due to a lack of
-    talent or the rise of automation, but by design. Rooted in outdated
-    industrial management theories and reinforced by neoliberal economic
-    priorities, hiring has become a mechanical, transactional process.
-    Platform ecosystems and metric-driven assessments reduce candidates
-    to data points, obscuring human judgment and perpetuating systemic
-    bias.</p>
-    <p>This system lacks meaningful feedback loops, preventing
-    organizations from learning or adapting their hiring practices.
-    Unless companies reclaim hiring as a strategic, human-centered
-    function - one that values creativity, context, and long-term
-    potential — the current dysfunction will continue to filter out not
-    only poor fits but also those who offer real, diverse, and
-    under-recognized value beyond algorithmic visibility.</p>
-    <p>Transforming hiring requires embracing complexity, rejecting
-    simplistic metrics, and embedding reflexivity into every stage of
-    the process. Only then can tech organizations build diverse,
-    resilient teams ready for the future’s challenges.</p>
+    <p>Recent research indicates that the dysfunctions in modern tech
+    hiring are rooted in legacy industrial and neoliberal frameworks
+    that emphasize mechanization, control, and efficiency <span
+    class="citation"
+    data-cites="ajunwa2016hiring harvey2005neoliberalism">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-harvey2005neoliberalism"
+    role="doc-biblioref">Harvey, 2005</a>)</span>. Platform ecosystems<a
+    href="#fn10" class="footnote-ref" id="fnref10"
+    role="doc-noteref"><sup>10</sup></a> and metric-driven assessments
+    reduce candidates to data points, potentially obscuring human
+    judgment and perpetuating bias.</p>
+    <p>Without strategic shifts toward more human-centered hiring
+    processes that integrate complexity and reflexivity, organizations
+    risk continuing exclusionary and superficial selection patterns
+    <span class="citation"
+    data-cites="gray2019ghostwork ajunwa2016hiring">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-gray2019ghostwork" role="doc-biblioref">Gray
+    &amp; Suri, 2019</a>)</span>.</p>
+    <p>Transforming hiring processes may involve moving beyond
+    simplistic metrics, embracing organizational complexity, and
+    embedding adaptive feedback mechanisms to build diverse and
+    resilient teams prepared for evolving challenges <span
+    class="citation" data-cites="muller2018tyranny ajunwa2016hiring">(<a
+    href="#ref-ajunwa2016hiring" role="doc-biblioref">Ajunwa et al.,
+    2016</a>; <a href="#ref-muller2018tyranny"
+    role="doc-biblioref">Muller, 2018</a>)</span>.</p>
     <h2 class="unnumbered" id="references">References</h2>
     <div id="refs" class="references csl-bib-body hanging-indent"
     data-line-spacing="2" role="list">
@@ -451,10 +466,6 @@
     Buchanan, D. A., &amp; Dawson, P. (2019). Organizational
     decision-making under uncertainty: The importance of adaptability.
     <em>European Management Journal</em>, <em>37</em>(6), 745–755.
-    </div>
-    <div id="ref-graeber2018bullshit" class="csl-entry" role="listitem">
-    Graeber, D. (2018). <em>Bullshit jobs: A theory</em>. Simon &amp;
-    Schuster.
     </div>
     <div id="ref-gray2019ghostwork" class="csl-entry" role="listitem">
     Gray, M. L., &amp; Suri, S. (2019). Ghost work: How to stop silicon
@@ -510,5 +521,52 @@
     for a human future at the new frontier of power</em>. PublicAffairs.
     </div>
     </div>
+    <aside id="footnotes" class="footnotes footnotes-end-of-document"
+    role="doc-endnotes">
+    <hr />
+    <ol>
+    <li id="fn1"><p>Measurable stand-ins for complex qualities<a
+    href="#fnref1" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn2"><p>Automated, standardized, fragmented hiring<a
+    href="#fnref2" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn3"><p>GitHub stars are user-generated markers of
+    repository popularity on GitHub, a platform widely used for software
+    development and collaboration.<a href="#fnref3"
+    class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+    <li id="fn4"><p>HackerRank scores represent performance results on
+    coding challenges administered via the HackerRank platform, commonly
+    used in technical hiring.<a href="#fnref4" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn5"><p>Data structured for automated processing<a
+    href="#fnref5" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn6"><p>An Applicant Tracking System (ATS) is software used
+    by organizations to collect, sort, and filter job applications,
+    often using keyword searches and automated ranking.<a href="#fnref6"
+    class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+    <li id="fn7"><p>Referral networks consist of informal hiring
+    channels where current employees recommend candidates, which can
+    both support and limit diversity depending on network composition.<a
+    href="#fnref7" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn8"><p>Overreliance on numeric indicators replacing
+    judgment<span class="citation" data-cites="muller2018tyranny">(<a
+    href="#ref-muller2018tyranny" role="doc-biblioref">Muller,
+    2018</a>)</span><a href="#fnref8" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    <li id="fn9"><p>Culture fit refers to the assessment of how well a
+    candidate aligns with the existing values, norms, and social
+    environment of an organization, which can sometimes reinforce
+    exclusionary hiring practices.<a href="#fnref9"
+    class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+    <li id="fn10"><p>Digital infrastructures mediating interactions<span
+    class="citation" data-cites="srnicek2017platform">(<a
+    href="#ref-srnicek2017platform" role="doc-biblioref">Srnicek,
+    2017</a>)</span><a href="#fnref10" class="footnote-back"
+    role="doc-backlink">↩︎</a></p></li>
+    </ol>
+    </aside>
 </body>
 </html>
