@@ -10,7 +10,7 @@ This project automates the process of managing, converting, and publishing acade
 
 ![Shell Script](https://img.shields.io/badge/Scripting-Unix%20Shell-blue?logo=gnu-bash&logoColor=white)
 ![LaTeX](https://img.shields.io/badge/Markup-LaTeX-008080?logo=latex&logoColor=white)
-![JSON](https://img.shields.io/badge/Markup-JSON-red?logo=json&logoColor=white)
+![JSON](https://img.shields.io/badge/Format-JSON-blue?logo=json&logoColor=white)
 ![HTML](https://img.shields.io/badge/Markup-HTML5-orange?logo=html5&logoColor=white)
 
 
