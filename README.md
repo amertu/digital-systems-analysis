@@ -4,6 +4,16 @@
 
 This project automates the process of managing, converting, and publishing academic and technical articles written in LaTeX (Overleaf projects) as clean, styled HTML pages on GitHub Pages. It integrates Overleaf private project repositories as git submodules or cloned repos, converts LaTeX sources to HTML using Pandoc with citation support and math rendering, generates an index page with article metadata, and deploys the output automatically via GitHub Actions.
 
+## Tech Stack
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/amertu/digital-systems-analysis/build.yml?branch=main&label=GitHub%20Actions&logo=github)](https://github.com/amertu/digital-systems-analysis/actions/workflows/build.yml)
+
+
+![Shell Script](https://img.shields.io/badge/Scripting-Unix%20Shell-blue?logo=gnu-bash&logoColor=white)
+![LaTeX](https://img.shields.io/badge/Markup-LaTeX-008080?logo=latex&logoColor=white)
+![JSON](https://img.shields.io/badge/Markup-JSON-red?logo=json&logoColor=white)
+![HTML](https://img.shields.io/badge/Markup-HTML5-orange?logo=html5&logoColor=white)
+
+
 ## Key Features
 
 - **Automated cloning** of multiple Overleaf private projects using a personal access token.
