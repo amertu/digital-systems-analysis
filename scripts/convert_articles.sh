@@ -2,6 +2,7 @@
 set -e
 
 # ========== CONFIGURATION ==========
+BASE_URL="https://amertu.github.io"
 SRC_DIR="articles"
 OUT_DIR="output/articles"
 MAIN_TEX="main.tex"
@@ -48,7 +49,8 @@ for dir in "$SRC_DIR"/*; do
   done < <(jq -r 'to_entries | .[] | "\(.key)\t\(.value)"' "$meta_data")
   fi
 
-  metadata_args+=(--metadata "path=/$project_name/articles/$name/index.html")
+  metadata_args+=(--metadata "path=$BASE_URL/$project_name/articles/$name/index.html")
+
 
   echo "🔄 Converting $name → $out_index_file"
 
