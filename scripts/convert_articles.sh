@@ -49,7 +49,11 @@ for dir in "$SRC_DIR"/*; do
   done < <(jq -r 'to_entries | .[] | "\(.key)\t\(.value)"' "$meta_data")
   fi
 
-  metadata_args+=(--metadata "path=$BASE_URL/$project_name/articles/$name/index.html")
+  # Get article slug from metadata or fallback to folder name
+  slug=$(jq -r '.url // empty' "$meta_data" 2>/dev/null || echo "")
+  [ -z "$slug" ] && slug="$name"
+  
+  metadata_args+=(--metadata "path=$BASE_URL/$project_name/articles/$slug/index.html")
 
 
   echo "🔄 Converting $name → $out_index_file"
