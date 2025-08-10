@@ -11,6 +11,10 @@ CSL_FILE="apa.csl"
 TEMPLATE_FILE="scrartcl-template.html"
 CONFIG_SUBDIR="config"
 
+# Get the parent folder name of SRC_DIR (project folder)
+abs_src_dir=$(realpath "$SRC_DIR")
+project_name=$(basename "$(dirname "$abs_src_dir")")
+
 # ========== CREATE OUTPUT DIR ==========
 mkdir -p "$OUT_DIR"
 
@@ -43,6 +47,8 @@ for dir in "$SRC_DIR"/*; do
     fi
   done < <(jq -r 'to_entries | .[] | "\(.key)\t\(.value)"' "$meta_data")
   fi
+
+  metadata_args+=(--metadata "path=/$project_name/articles/$name/index.html")
 
   echo "🔄 Converting $name → $out_index_file"
 
