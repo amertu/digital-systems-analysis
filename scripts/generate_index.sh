@@ -39,8 +39,6 @@ for dir in "$OUTPUT_ARTICLES_DIR"/*; do
 
         date_meta=$(jq -r '.date // empty' "$meta_data")
         [[ -n "$date_meta" ]] && date_str="$date_meta"
-
-        path="articles/$slug/index.html"
     else
         echo "⚠️  No metadata for $slug"
     fi
