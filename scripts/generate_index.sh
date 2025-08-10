@@ -7,7 +7,6 @@ OUTPUT_ARTICLES_DIR="$OUTPUT_DIR/articles"
 OUTPUT_MAIN_FILE="$OUTPUT_DIR/index.html"
 ARTICLE_META_FILE="metadata.json"
 
-rm -rf "$OUTPUT_DIR" 
 mkdir -p "$OUTPUT_DIR"
 
   declare -A year_groups

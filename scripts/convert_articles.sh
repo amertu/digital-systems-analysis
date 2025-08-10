@@ -17,6 +17,7 @@ abs_src_dir=$(realpath "$SRC_DIR")
 project_name=$(basename "$(dirname "$abs_src_dir")")
 
 # ========== CREATE OUTPUT DIR ==========
+rm -rf "$OUTPUT_DIR" 
 mkdir -p "$OUT_DIR"
 
 for dir in "$SRC_DIR"/*; do
@@ -52,7 +53,7 @@ for dir in "$SRC_DIR"/*; do
   # Get article slug from metadata or fallback to folder name
   slug=$(jq -r '.url // empty' "$meta_data" 2>/dev/null || echo "")
   [ -z "$slug" ] && slug="$name"
-  
+
   metadata_args+=(--metadata "path=$BASE_URL/$project_name/articles/$slug/index.html")
 
 
